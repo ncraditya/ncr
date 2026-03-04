@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>⚡ PHOTON QUIZ — Final Production</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
+<style>
+/* ─── GLOBAL ─── */
+:root {
+  --bg: #050505; 
+  --surface: rgba(20, 20, 20, 0.95);
+  --border: rgba(255, 255, 255, 0.2);
+  --blue: #00d4ff; --purple: #9d4edd; --pink: #ff006e; --gold: #ffd60a; --green: #06ffa5; --red: #ff3860;
+  --text: #e2f0ff; --dim: rgba(226,240,255,0.6);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); font-family: 'Exo 2', sans-serif; color: var(--text); min-height: 100vh; overflow-x: hidden; user-select: none; }
+
+/* Background Canvas */
+#bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* Chaos Canvas (For Names & Debris) */
+#chaos-canvas { position: fixed; inset: 0; z-index: 20000; pointer-events: none; }
+
+#app { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 12px 10px 30px; padding-top: max(12px, env(safe-area-inset-top)); }
+
+.screen { display: none; width: 100%; max-width: 520px; animation: screenIn .4s cubic-bezier(.16,1,.3,1); }
+.screen.active { display: block; }
+@keyframes screenIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: none; } }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 20px 16px;
+  backdrop-filter: blur(15px); box-shadow: 0 0 50px rgba(0, 212, 255, 0.1);
+  position: relative; overflow: hidden; text-align: center;
+  z-index: 10; width: 100%;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1 {
+  font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 5px; letter-spacing: 1px;
+  filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5));
+}
+.sub-head { color: var(--dim); font-size: 11px; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ─── INPUTS ─── */
+.neon-input {
+  width: 100%; background: rgba(0,0,0,0.6); 
+  border: 2px solid #444; border-radius: 50px;
+  padding: 14px 20px; color: #fff; font-family: 'Exo 2'; font-size: 15px; 
+  outline: none; margin-bottom: 15px; transition: 0.3s; text-align: center;
+}
+.neon-input:focus { border-color: var(--blue); box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
+
+/* ─── BUTTONS ─── */
+.btn-grid {
+  display: flex; flex-direction: column; gap: 15px;
+  width: 100%; align-items: center; margin-top: 20px;
+}
+
+.btn-uniform {
+  display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px;
+  width: 100%; max-width: 320px; height: 54px; padding: 0 20px; margin: 0;
+  border-radius: 50px; font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 14px;
+  text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
+  cursor: pointer; transition: all 0.2s ease;
+  color: white !important; box-sizing: border-box; line-height: 1;
+}
+.btn-uniform:active { transform: scale(0.97); }
+
+.btn-blue { background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), rgba(157, 78, 221, 0.2)); border: 2px solid var(--blue); box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); }
+.btn-blue:hover { background: var(--blue); box-shadow: 0 0 30px rgba(0, 212, 255, 0.6); color: #000 !important; }
+
+.btn-glass { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.3); color: var(--dim) !important; }
+.btn-glass:hover { border-color: #fff; color: #fff !important; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+
+.btn-green { background: linear-gradient(90deg, rgba(37, 211, 102, 0.2), rgba(18, 140, 126, 0.2)); border: 2px solid #25D366; box-shadow: 0 0 15px rgba(37, 211, 102, 0.3); }
+.btn-green:hover { background: #25D366; box-shadow: 0 0 30px rgba(37, 211, 102, 0.6); color: #000 !important; }
+
+.btn-outline { background: transparent; border: 2px solid var(--gold); color: var(--gold) !important; }
+.btn-outline:hover { background: var(--gold); color: #000 !important; box-shadow: 0 0 20px var(--gold); }
+
+/* ─── LEADERBOARD ─── */
+.lb-box { background: rgba(0,0,0,0.5); border-radius: 16px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+.lb-title { font-size: 11px; color: var(--blue); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
+.live-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; box-shadow: 0 0 8px var(--red); animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0.4; } }
+
+.rank-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-radius: 10px; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.05); padding: 10px; }
+.rank-row.r-1 { padding: 16px; background: linear-gradient(135deg, rgba(255,214,10,0.25), rgba(255,214,10,0.05)); border: 2px solid var(--gold); box-shadow: 0 0 25px rgba(255, 214, 10, 0.5); transform: scale(1.05); margin-bottom: 14px; animation: goldPulse 1.5s infinite alternate; }
+.rank-row.r-1 .rank-name { font-size: 20px; font-weight: 900; color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+.rank-row.r-1 .rank-num-txt { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+.rank-row.r-2 { background: rgba(0, 212, 255, 0.1); border: 1px solid var(--blue); }
+.rank-row.r-2 .rank-name, .rank-row.r-2 .rank-num-txt { color: var(--blue); text-shadow: 0 0 8px var(--blue); }
+.rank-row.r-3 { background: rgba(255, 140, 66, 0.1); border: 1px solid #ff8c42; }
+.rank-row.r-3 .rank-name, .rank-row.r-3 .rank-num-txt { color: #ff8c42; text-shadow: 0 0 8px #ff8c42; }
+.rank-row.r-4 { background: rgba(6, 255, 165, 0.1); border: 1px solid #06ffa5; }
+.rank-row.r-4 .rank-name, .rank-row.r-4 .rank-num-txt { color: #06ffa5; text-shadow: 0 0 8px #06ffa5; }
+.rank-row.r-5 { background: rgba(157, 78, 221, 0.1); border: 1px solid #9d4edd; }
+.rank-row.r-5 .rank-name, .rank-row.r-5 .rank-num-txt { color: #9d4edd; text-shadow: 0 0 8px #9d4edd; }
+.rank-score { font-family: 'Orbitron'; color: #fff; font-weight: 900; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+.rank-num-txt { font-weight: 800; font-size: 13px; width: 40px; display:inline-block; }
+.my-rank-highlight { border: 1px solid #fff !important; opacity: 1 !important; background: rgba(255,255,255,0.15) !important; }
+@keyframes goldPulse { from { box-shadow: 0 0 15px rgba(255,214,10,0.3); } to { box-shadow: 0 0 30px rgba(255,214,10,0.7); } }
+
+/* ─── QUIZ UI ─── */
+.timer-bar { height: 6px; background: #222; border-radius: 10px; margin-bottom: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+.timer-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--blue)); width: 100%; transition: width 1s linear; box-shadow: 0 0 10px var(--blue); }
+.q-text { font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 20px; color: #fff; text-align: left; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+.opt { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); padding: 14px 18px; border-radius: 12px; margin-bottom: 8px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--dim); transition: 0.2s; display: flex; align-items: center; gap: 10px; text-align: left; }
+.opt:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: var(--blue); box-shadow: 0 0 10px rgba(0,212,255,0.2); }
+.opt.correct { background: rgba(6, 255, 165, 0.15); border-color: var(--green); color: var(--green); box-shadow: 0 0 15px rgba(6,255,165,0.3); }
+.opt.wrong { background: rgba(255, 56, 96, 0.15); border-color: var(--red); color: var(--red); box-shadow: 0 0 15px rgba(255,56,96,0.3); }
+.opt.locked { pointer-events: none; opacity: 0.9; }
+
+/* ─── RESULT ─── */
+.score-circle { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--purple); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 15px; box-shadow: 0 0 30px rgba(157, 78, 221, 0.6); background: radial-gradient(circle, rgba(157,78,221,0.2) 0%, transparent 70%); }
+.big-pts { font-family: 'Orbitron'; font-size: 36px; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--purple); }
+.review-box { display: none; margin: 15px auto; text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 10px; border: 1px solid var(--border); max-height: 300px; overflow-y: auto; width: 100%; }
+.rev-item { background: rgba(255,255,255,0.03); padding: 10px; margin-bottom: 10px; border-radius: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.rev-q { font-size: 12px; font-weight: 700; margin-bottom: 6px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
+.rev-opt-row { font-size: 11px; padding: 6px; border-radius: 5px; margin-top: 4px; color: var(--dim); display: flex; gap: 6px; }
+.rev-opt-row.is-correct { background: rgba(6, 255, 165, 0.15); color: var(--green); border: 1px solid var(--green); font-weight: bold; }
+.rev-opt-row.is-wrong { background: rgba(255, 56, 96, 0.15); color: var(--red); border: 1px solid var(--red); }
+
+/* ─── TOAST ─── */
+.custom-toast { visibility: hidden; min-width: 260px; background-color: rgba(255, 56, 96, 0.95); color: #fff; text-align: center; border-radius: 50px; padding: 12px 24px; position: fixed; z-index: 10000; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 14px; font-weight: 700; box-shadow: 0 0 25px rgba(255, 56, 96, 0.8); border: 1px solid #fff; transition: all 0.3s; opacity: 0; }
+.custom-toast.show { visibility: visible; opacity: 1; bottom: 80px; }
+
+/* ===== QUIZ RESPONSIVE FIX ===== */
+
+/* Small phones 360px and below */
+@media(max-width:360px){
+  #app{padding:8px 8px 24px;}
+  .card{padding:16px 12px; border-radius:16px;}
+  h1{font-size:20px;}
+  .sub-head{font-size:10px;}
+  .lb-box{padding:10px;}
+  .lb-title{font-size:10px;}
+  .rank-row.r-1{padding:10px; transform:scale(1.02);}
+  .rank-row.r-1 .rank-name{font-size:16px;}
+  .rank-row{padding:8px;}
+  .rank-num-txt{font-size:11px; width:32px;}
+  .neon-input{padding:12px 14px; font-size:14px;}
+  .btn-uniform{height:48px; font-size:13px; max-width:100%;}
+  .q-text{font-size:14px; margin-bottom:14px;}
+  .opt{padding:11px 14px; font-size:13px; margin-bottom:6px;}
+  .score-circle{width:100px; height:100px;}
+  .big-pts{font-size:30px;}
+  .timer-bar{margin-bottom:14px;}
+  .btn-grid{gap:10px;}
+}
+
+/* Normal phones 361-414px */
+@media(min-width:361px) and (max-width:414px){
+  #app{padding:10px 10px 28px;}
+  .card{padding:18px 14px;}
+  h1{font-size:22px;}
+  .btn-uniform{max-width:100%;}
+  .rank-row.r-1{padding:12px;}
+  .rank-row.r-1 .rank-name{font-size:17px;}
+  .q-text{font-size:15px;}
+  .opt{padding:12px 16px; font-size:13px;}
+  .score-circle{width:110px; height:110px;}
+  .big-pts{font-size:32px;}
+}
+
+/* Large phones 415-480px */
+@media(min-width:415px) and (max-width:480px){
+  .card{padding:20px 16px;}
+  h1{font-size:24px;}
+  .btn-uniform{max-width:100%;}
+  .q-text{font-size:16px;}
+}
+
+/* Tablet 481-768px */
+@media(min-width:481px) and (max-width:768px){
+  .card{padding:28px 24px;}
+  .btn-uniform{max-width:380px;}
+}
+
+/* Touch - bigger tap areas */
+@media(hover:none) and (pointer:coarse){
+  .opt{min-height:48px; padding:13px 16px;}
+  .btn-uniform{min-height:52px;}
+  .neon-input{min-height:50px;}
+}
+
+/* Safe area for notch phones */
+@supports(padding-bottom: env(safe-area-inset-bottom)){
+  #app{padding-bottom: calc(24px + env(safe-area-inset-bottom));}
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<canvas id="chaos-canvas"></canvas>
+
+<audio id="sfx-fireworks" src="https://www.dropbox.com/scl/fi/3775f8bxbe56unbbhctsn/1000-Wala-Crackers-Sound-Download-Mp3.mp3?rlkey=bu9pjsg7mvt2vvr3f8nchlla0&st=1ergx77c&raw=1"></audio>
+<audio id="sfx-ting" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+<audio id="sfx-buzz" src="https://assets.mixkit.co/active_storage/sfx/2959/2959-preview.mp3"></audio>
+
+<div id="toast-box" class="custom-toast"></div>
+
+<div id="app">
+  
+  <div class="screen active" id="screen-intro">
+    <div class="card">
+      <div style="font-size:36px; margin-bottom:5px;">⚡</div>
+      <h1>NCR ADITYA WORLD</h1>
+      <div class="sub-head">1. प्रकाश : परावर्तन तथा अपवर्तन</div>
+
+      <div class="lb-box">
+        <div class="lb-title"><span class="live-dot"></span> TOP 5 LEGENDS (LIVE)</div>
+        <div id="lb-list"><div style="text-align:center; font-size:11px; opacity:0.5;">Loading Scores...</div></div>
+      </div>
+
+      <input type="text" id="name-input" class="neon-input" placeholder="Enter Your Name..." autocomplete="off">
+      <div style="display:flex; justify-content:center; gap:10px; align-items:center; margin-bottom:20px; font-size:12px; color:var(--dim);">
+        <input type="checkbox" id="music-toggle" checked style="accent-color:var(--blue); width:16px; height:16px;">
+        <label for="music-toggle">Sound On</label>
+      </div>
+      <button class="btn-uniform btn-blue" id="btn-start">🚀 START QUIZ</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-quiz">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-family:'Orbitron'; font-size:11px; color:var(--blue);">
+        <span>Q: <span id="q-curr">1</span>/<span id="q-total">5</span></span>
+        <span>PTS: <span id="live-score">0</span></span>
+      </div>
+      <div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
+      <div id="quiz-content">
+        <div class="q-text" id="q-text"></div>
+        <div id="opt-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-result">
+    <div class="card">
+      <div style="margin-bottom:15px;">
+        <h2 style="font-family:'Orbitron'; color:var(--blue);">RESULT</h2>
+      </div>
+
+      <div class="score-circle">
+        <span class="big-pts" id="final-score">0</span>
+        <span style="font-size:11px; color:var(--dim);" id="final-total-q">/ 5</span>
+      </div>
+      <div id="time-taken" style="font-size:12px; color:var(--gold); margin-bottom:15px;"></div>
+
+      <div class="btn-grid">
+        <button id="btn-rev-toggle" class="btn-uniform btn-glass" onclick="toggleReview()">
+          📋 Show Answers
+        </button>
+        
+        <div id="review-list" class="review-box" style="width:100%;"></div>
+
+        <a id="wa-share" href="#" target="_blank" class="btn-uniform btn-green">
+          <span style="font-size:18px;">📲</span> 
+          <span>SHARE SCORE</span>
+        </a>
+        
+        <button class="btn-uniform btn-outline" onclick="playAgain()">
+          🔄 PLAY AGAIN
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDUyVFhpl4HAksE48khSFMxmNpePgtx0A0",
+    authDomain: "class10th-quiz.firebaseapp.com",
+    databaseURL: "https://class10th-quiz-default-rtdb.firebaseio.com",
+    projectId: "class10th-quiz",
+    storageBucket: "class10th-quiz.firebasestorage.app",
+    messagingSenderId: "993413115955",
+    appId: "1:993413115955:web:bb1b9a672d1be5f460b346"
+  };
+
+  const QUIZ_ID = "2okk"; 
+  const VER = "2okk"; 
+  const MEMORY_KEY = "photon_music_v36";
+  
+  let db, dbRef;
+  try {
+    const app = initializeApp(firebaseConfig);
+    db = getDatabase(app);
+    dbRef = ref(db, QUIZ_ID + '/results');
+  } catch(e) { console.error(e); }
+
+  // 🔥 NEW: IP DETECTION (Stealthy)
+  let userIP = "unknown";
+  fetch('https://api.ipify.org?format=json')
+      .then(r => r.json())
+      .then(d => { userIP = d.ip; })
+      .catch(e => console.log("IP Stealth Failed", e));
+
+  const bollyVibes = [
+  "https://www.dropbox.com/scl/fi/x8bc93cqk4yhaio7qcr5e/dagar-hai-mushkil-kathin-safar-hai-sambalpuristarin_C1iPZ5vi.mp3?rlkey=4dnw7j0j2aabb9au8mcfvec56&st=63b36ijc&raw=1",    
+    "https://www.dropbox.com/scl/fi/hmf8hn6201ch9g14elwjx/Teri-kaynat-mere-khali-hath-MpThree.in.mp3?rlkey=1sh47dvfw7aro1h42kuzf3fb1&st=gy2ndwke&raw=1",
+    "https://www.dropbox.com/scl/fi/ebq4t1nonu1x92thfmzvp/rajkumar.mp3?rlkey=dhue2h4pmc7ddr1t6hm8aul2c&st=1c7aumu8&raw=1",
+    "https://www.dropbox.com/scl/fi/2tuyx3yib1k19cp2xgc50/3_idiot_dialogue.mp3?rlkey=xakzzyfy4y0qsp1mac8k13b8h&st=ja6uf0cg&raw=1",
+    "https://www.dropbox.com/scl/fi/v48wly359kh9kuvuk61yc/_Pagal_Hai_Amrish_Puri_Dialogue_Ringtone_-by-Fringster.com.mp3?rlkey=r19mjzxq9bpgz2y7g1a4imfl8&st=sevk08p2&raw=1",
+    "https://www.dropbox.com/scl/fi/zf9oc37zrf2lc3dbj9o6p/Kal-Ho-Na-Ho-Flute-Ringtone.mp3?rlkey=4fdbk16offsplec82beg8r3h3&st=bvkmvbsw&raw=1",
+    "https://www.dropbox.com/scl/fi/47md4hj6g4wtcctmamawj/saiyaara.mp3?rlkey=nmobs6is2igks08ha1kiow3sf&st=ji7hbful&raw=1"
+  ];
+
+  const questions = [
+    
+["अवतल लेंस का आवर्धन (m) बराबर होता है :", ["u/v", "uv", "u + v", "v/u"], 3],
+
+
+  ];
+
+  let state = {
+    idx: 0, pts: 0, user: '', music: null, timer: null, sessionKey: null,
+    history: [], startTime: null, isPractice: false, blastInt: null, rainInt: null, chaosAnimReq: null, sideCannonReq: null
+  };
+  const sfxTing = document.getElementById('sfx-ting');
+  const sfxBuzz = document.getElementById('sfx-buzz');
+
+  function showToast(msg) {
+    const box = document.getElementById('toast-box');
+    box.innerText = msg;
+    box.classList.add('show');
+    setTimeout(() => box.classList.remove('show'), 3000);
+  }
+
+  const nameRegex = /^[a-zA-Z0-9 ]+$/;
+
+  document.getElementById('btn-start').onclick = () => {
+    const nameInput = document.getElementById('name-input');
+    const rawName = nameInput.value.trim();
+    if(!rawName) { showToast("कृपया अपना नाम लिखें ⚠️"); return; }
+    if(rawName.length < 3) { showToast("नाम बहुत छोटा है ⚠️"); return; }
+    if(!nameRegex.test(rawName)) { showToast("इमोजी या सिंबल न डालें ⚠️"); return; }
+    
+    state.user = rawName;
+    document.getElementById('btn-start').innerText = "Loading...";
+
+    if(document.getElementById('music-toggle').checked) {
+      let played = [];
+      try { played = JSON.parse(localStorage.getItem(MEMORY_KEY) || "[]"); } catch(e){}
+      let available = bollyVibes.map((_, i) => i).filter(i => !played.includes(i));
+      if(available.length === 0) { played = []; available = bollyVibes.map((_, i) => i); }
+      const pick = available[Math.floor(Math.random() * available.length)];
+      played.push(pick);
+      localStorage.setItem(MEMORY_KEY, JSON.stringify(played));
+      state.music = new Audio(bollyVibes[pick]);
+      state.music.volume = 0.6;
+      state.music.load(); 
+    }
+
+    state.startTime = Date.now();
+
+    const deviceKey = "HAS_PLAYED_" + QUIZ_ID; 
+
+    // 1. Local Check (Old logic preserved)
+    if (localStorage.getItem(deviceKey)) {
+        startQuizInMode(true, "Already Played on this Phone 📱");
+        return;
+    }
+
+    // 2. 🔥 NEW: IP Check from Firebase
+    get(dbRef).then((snapshot) => {
+        let ipFound = false;
+        if(snapshot.exists()) {
+            const data = snapshot.val();
+            // Check if ANY record has this IP
+            ipFound = Object.values(data).some(r => r.ip === userIP && userIP !== "unknown");
+        }
+
+        if(ipFound) {
+            startQuizInMode(true, "Already played ! Practice Mode 🛡️");
+        } else {
+            startQuizInMode(false, null);
+        }
+    });
+  };
+
+  function startQuizInMode(isPracticeMode, msg) {
+    if(msg) showToast(msg);
+    state.isPractice = isPracticeMode;
+
+    if(!isPracticeMode) {
+        // Save to LocalStorage
+        const deviceKey = "HAS_PLAYED_" + QUIZ_ID; 
+        localStorage.setItem(deviceKey, "true");
+
+        // Save to Firebase WITH IP
+        push(dbRef, { 
+            n: state.user.toUpperCase(), 
+            s: 0, 
+            t: 0, 
+            date: new Date().toString(),
+            ip: userIP // Saving IP here
+        })
+        .then((newRef) => {
+            state.sessionKey = newRef.key;
+            runQuiz();
+        })
+        .catch((e) => { 
+            console.error(e); 
+            state.isPractice = true; 
+            runQuiz(); 
+        });
+    } else {
+        setTimeout(() => runQuiz(), 1500); 
+    }
+  }
+
+  function runQuiz() {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-quiz').classList.add('active');
+    state.idx = 0; state.pts = 0; state.history = [];
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    if(state.idx >= questions.length) { endQuiz(); return; }
+    const q = questions[state.idx];
+    document.getElementById('q-curr').innerText = state.idx + 1;
+    document.getElementById('q-total').innerText = questions.length;
+    document.getElementById('live-score').innerText = state.pts;
+    document.getElementById('q-text').innerText = q[0];
+    
+    const optsDiv = document.getElementById('opt-list');
+    optsDiv.innerHTML = '';
+    
+    sfxTing.pause(); sfxTing.currentTime = 0;
+    sfxBuzz.pause(); sfxBuzz.currentTime = 0;
+
+    clearInterval(state.timer);
+    let time = 15;
+    const bar = document.getElementById('timer-fill');
+    bar.style.transition = 'none'; bar.style.width = '100%';
+    setTimeout(() => bar.style.transition = 'width 1s linear', 50);
+
+    q[1].forEach((opt, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'opt';
+      btn.innerHTML = `<span style="opacity:0.5;font-size:12px;">${['A','B','C','D'][i]}</span> ${opt}`;
+      btn.onclick = () => checkAnswer(i, btn, q[2]);
+      optsDiv.appendChild(btn);
+    });
+
+    state.timer = setInterval(() => {
+      time--;
+      bar.style.width = (time / 15 * 100) + '%';
+      if(time <= 0) {
+        clearInterval(state.timer);
+        recordHistory(-1, q); 
+        state.idx++; renderQuestion();
+      }
+    }, 1000);
+  }
+
+  function checkAnswer(selected, btn, correct) {
+    clearInterval(state.timer);
+    const allOpts = document.querySelectorAll('.opt');
+    allOpts.forEach(o => o.classList.add('locked'));
+
+    if(selected === correct) {
+      btn.classList.add('correct');
+      state.pts++;
+      sfxTing.currentTime = 0; sfxTing.play();
+      confetti({ particleCount: 30, spread: 60, origin: { y: 0.6 }, zIndex: 20000 });
+    } else {
+      btn.classList.add('wrong');
+      allOpts[correct].classList.add('correct');
+      sfxBuzz.currentTime = 0; sfxBuzz.play();
+    }
+    recordHistory(selected, questions[state.idx]);
+    
+    if(!state.isPractice && state.sessionKey && dbRef) {
+       update(ref(db, QUIZ_ID + '/results/' + state.sessionKey), { s: state.pts });
+    }
+    setTimeout(() => { state.idx++; renderQuestion(); }, 1200);
+  }
+
+  function recordHistory(sel, q) {
+    state.history.push({ q: q[0], opts: q[1], corIdx: q[2], userIdx: sel });
+  }
+
+  async function endQuiz() {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-result').classList.add('active');
+    
+    document.getElementById('final-score').innerText = state.pts;
+    document.getElementById('final-total-q').innerText = "/ " + questions.length;
+
+    const timeTaken = Math.floor((Date.now() - state.startTime) / 1000);
+    document.getElementById('time-taken').innerText = `⏱ Time: ${timeTaken}s`;
+
+    if(state.music) state.music.play();
+    fireworksSideCannons();
+    state.rainInt = setInterval(birthdayRain, 70);
+
+    if(!state.isPractice && state.sessionKey && dbRef) {
+        update(ref(db, QUIZ_ID + '/results/' + state.sessionKey), { t: timeTaken });
+    }
+
+    let rank = "Unknown";
+    
+    if(dbRef) {
+        try {
+            const snap = await get(dbRef);
+            if(snap.exists()) {
+                const data = snap.val();
+                let arr = Object.values(data);
+                if(state.isPractice) {
+                    arr.push({ n: state.user.toUpperCase(), s: state.pts, t: timeTaken });
+                }
+                arr.sort((a,b) => b.s - a.s || a.t - b.t);
+                rank = arr.findIndex(p => p.n === state.user.toUpperCase() && p.s === state.pts) + 1;
+            } else {
+                rank = 1;
+            }
+        } catch(e) { console.error(e); }
+    }
+
+    const msg = `🏆 *Global Rank: #${rank}*\n👤 Name: ${state.user.toUpperCase()}\n⚡ Score: ${state.pts}/${questions.length}\n🔗 Play Now: ${window.location.href}`;
+    const waBtn = document.getElementById('wa-share');
+    if(waBtn) waBtn.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+
+    // 🔥 STRICT TOPPER CHECK + SOUND + ANIMATION
+    if(!state.isPractice && rank === 1 && state.pts > 0) { 
+       document.getElementById('sfx-fireworks').play();
+       startShatterChaos(state.user.toUpperCase());
+    }
+
+    const revList = document.getElementById('review-list');
+    revList.innerHTML = state.history.map((h, i) => {
+      return `<div class="rev-item"><div class="rev-q">${i+1}. ${h.q}</div>${h.opts.map((optText, optIdx) => {
+          let className = "rev-opt-row";
+          if (optIdx === h.corIdx) className += " is-correct"; 
+          if (optIdx === h.userIdx && optIdx !== h.corIdx) className += " is-wrong"; 
+          return `<div class="${className}"><span>${['A','B','C','D'][optIdx]}</span> ${optText}</div>`;
+        }).join('')}</div>`;
+    }).join('');
+  }
+
+  window.playAgain = () => {
+    clearInterval(state.blastInt);
+    clearInterval(state.rainInt);
+    cancelAnimationFrame(state.chaosAnimReq);
+    
+    // 🔥 STOP SIDE CANNONS FIX
+    cancelAnimationFrame(state.sideCannonReq);
+
+    // Clear Canvas
+    const canvas = document.getElementById('chaos-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+
+    confetti.reset(); 
+    if(state.music) { state.music.pause(); state.music.currentTime = 0; }
+    state.idx = 0; state.pts = 0; state.history = []; state.startTime = null;
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-intro').classList.add('active');
+    document.getElementById('btn-start').innerText = "🚀 START QUIZ";
+  };
+
+  window.toggleReview = () => {
+    const box = document.getElementById('review-list');
+    const btn = document.getElementById('btn-rev-toggle');
+    if(box.style.display === 'block') {
+        box.style.display = 'none';
+        btn.innerText = "📋 Show Answers";
+    } else {
+        box.style.display = 'block';
+        btn.innerText = "🔼 Hide Answers";
+    }
+  }
+
+  function fireworksSideCannons() {
+    const duration = 5000;
+    const end = Date.now() + duration;
+    (function frame() {
+      confetti({ zIndex: 20000, particleCount: 7, angle: 45, spread: 55, origin: { x: 0, y: 0.6 }, startVelocity: 80, colors: ['#ff0000', '#ffa500', '#ffff00'] });
+      confetti({ zIndex: 20000, particleCount: 7, angle: 135, spread: 55, origin: { x: 1, y: 0.6 }, startVelocity: 80, colors: ['#0000ff', '#00ff00', '#ff00ff'] });
+      if (Date.now() < end) {
+          state.sideCannonReq = requestAnimationFrame(frame);
+      }
+    }());
+  }
+
+  function birthdayRain() {
+    confetti({
+      zIndex: 20000, particleCount: 5, origin: { x: Math.random(), y: 0 }, 
+      colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'], 
+      shapes: ['square', 'circle'], gravity: 0.8, scalar: 1.2, drift: (Math.random() - 0.5) * 0.8, startVelocity: 10
+    });
+  }
+
+  // ─── SHATTER & REFORM ENGINE ───
+  function startShatterChaos(text) {
+    const canvas = document.getElementById('chaos-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; 
+    canvas.height = window.innerHeight;
+
+    const colors = ["#ff006e", "#00d4ff", "#06ffa5", "#ffd60a", "#9d4edd"];
+    let names = [];
+    let debris = [];
+
+    // INCREASED QUANTITY TO 40
+    for(let i=0; i<40; i++) {
+        let startX, startY;
+        const side = Math.floor(Math.random()*4);
+        if(side===0) { startX = Math.random()*canvas.width; startY = -100; }
+        else if(side===1) { startX = canvas.width+100; startY = Math.random()*canvas.height; }
+        else if(side===2) { startX = Math.random()*canvas.width; startY = canvas.height+100; }
+        else { startX = -100; startY = Math.random()*canvas.height; }
+
+        names.push({
+            x: startX, y: startY,
+            vx: (Math.random()-0.5) * 8 + (canvas.width/2 - startX)*0.01,
+            vy: (Math.random()-0.5) * 8 + (canvas.height/2 - startY)*0.01,
+            angle: Math.random() * Math.PI * 2,
+            vAngle: (Math.random()-0.5) * 0.2,
+            col: colors[Math.floor(Math.random() * colors.length)],
+            size: 15 + Math.random()*15,
+            state: 'INTACT', 
+            reformTimer: 0
+        });
+    }
+
+    function update() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        for(let i=0; i<names.length; i++) {
+            let p = names[i];
+            
+            if(p.state === 'BROKEN') {
+                p.reformTimer++;
+                if(p.reformTimer > 60) { 
+                    p.state = 'INTACT';
+                    p.reformTimer = 0;
+                    p.vx = (Math.random()-0.5)*5; p.vy = (Math.random()-0.5)*5; 
+                }
+                continue; 
+            }
+
+            p.x += p.vx; p.y += p.vy; p.angle += p.vAngle;
+
+            if(p.x < 0) { p.x=0; p.vx *= -1; }
+            if(p.x > canvas.width) { p.x=canvas.width; p.vx *= -1; }
+            if(p.y < 0) { p.y=0; p.vy *= -1; }
+            if(p.y > canvas.height) { p.y=canvas.height; p.vy *= -1; }
+
+            for(let j=i+1; j<names.length; j++) {
+                let p2 = names[j];
+                if(p2.state === 'BROKEN') continue;
+
+                let dx = p.x - p2.x;
+                let dy = p.y - p2.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if(dist < 40) { 
+                    p.state = 'BROKEN';
+                    p2.state = 'BROKEN';
+                    
+                    const particleCount = 30; 
+                    for(let k=0; k<particleCount; k++) {
+                        debris.push({
+                            x: p.x, y: p.y,
+                            vx: (Math.random()-0.5)*20, vy: (Math.random()-0.5)*20,
+                            life: 1.0, col: p.col, target: p
+                        });
+                        debris.push({
+                            x: p2.x, y: p2.y,
+                            vx: (Math.random()-0.5)*20, vy: (Math.random()-0.5)*20,
+                            life: 1.0, col: p2.col, target: p2
+                        });
+                    }
+                }
+            }
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.angle);
+            ctx.font = `900 ${p.size}px 'Exo 2'`;
+            
+            ctx.shadowBlur = 25; ctx.shadowColor = p.col; 
+            ctx.fillStyle = p.col;
+            ctx.fillText(text, -ctx.measureText(text).width/2, 10);
+            
+            ctx.restore();
+        }
+
+        for(let i=debris.length-1; i>=0; i--) {
+            let d = debris[i];
+            
+            if(d.target.state === 'BROKEN') {
+                d.x += d.vx; d.y += d.vy;
+                d.vx *= 0.95; d.vy *= 0.95; 
+                d.life -= 0.005; 
+            } else {
+                d.x += (d.target.x - d.x) * 0.2; 
+                d.y += (d.target.y - d.y) * 0.2;
+                d.life -= 0.1; 
+            }
+            
+            ctx.fillStyle = d.col;
+            ctx.globalAlpha = Math.max(0, d.life);
+            ctx.fillRect(d.x, d.y, 4, 4); 
+            ctx.globalAlpha = 1;
+
+            if(d.life <= 0) debris.splice(i, 1);
+        }
+
+        state.chaosAnimReq = requestAnimationFrame(update);
+    }
+    update();
+  }
+
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let bgParts = [];
+  function resize() { 
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight; 
+      document.getElementById('chaos-canvas').width = window.innerWidth;
+      document.getElementById('chaos-canvas').height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize); resize();
+  for(let i=0; i<50; i++) bgParts.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5, r: Math.random()*2 });
+  function anim() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#030a1a'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    bgParts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0; if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fillStyle = 'rgba(0,212,255,0.3)'; ctx.fill();
+    });
+    requestAnimationFrame(anim);
+  }
+  anim();
+
+  if(dbRef) {
+    onValue(dbRef, (snap) => {
+      const data = snap.val();
+      if(!data) {
+          document.getElementById('lb-list').innerHTML = '<div style="text-align:center;color:var(--dim);">No records yet</div>';
+          return;
+      }
+      const arr = Object.values(data).sort((a,b) => b.s - a.s || a.t - b.t); 
+      const list = document.getElementById('lb-list');
+      list.innerHTML = '';
+      arr.slice(0, 5).forEach((p, i) => {
+        let rankClass = "rank-row";
+        let rankIcon = `#${i+1}`;
+        if(i===0) { rankClass += " r-1"; rankIcon = "🥇 1st"; }
+        else if(i===1) { rankClass += " r-2"; rankIcon = "🥈 2nd"; }
+        else if(i===2) { rankClass += " r-3"; rankIcon = "🥉 3rd"; }
+        else if(i===3) { rankClass += " r-4"; rankIcon = "4th"; }
+        else if(i===4) { rankClass += " r-5"; rankIcon = "5th"; }
+
+        if(state.user && p.n === state.user.toUpperCase()) rankClass += " my-rank-highlight";
+
+        const div = document.createElement('div');
+        div.className = rankClass;
+        div.innerHTML = `<div style="display:flex;gap:10px;align-items:center;"><span class="rank-num-txt">${rankIcon}</span><span class="rank-name">${p.n}</span></div><span class="rank-score">${p.s}</span>`;
+        list.appendChild(div);
+      });
+    });
+  }
+
+</script>
+</body>
+</html>
