@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Quiz Hub — आदित्य कोचिंग सेंटर</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- ✅ सिर्फ quiz-data.js edit करो — यह file कभी मत बदलो -->
+<script src="quiz-data.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#08010f;
+  --p1:#b44fff;
+  --p2:#7c3aed;
+  --neon:#e040fb;
+  --neon2:#00fff7;
+  --white:#f3eeff;
+  --dim:#7a6a99;
+  --card:#110022;
+  --border:rgba(180,79,255,0.18);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Noto Sans Devanagari',sans-serif;min-height:100vh;overflow-x:hidden;width:100%;}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(180,79,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(180,79,255,0.04) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;z-index:0;
+}
+
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);animation:orbf 14s ease-in-out infinite;}
+.o1{width:500px;height:500px;background:rgba(124,58,237,0.18);top:-150px;left:-150px;animation-delay:0s;}
+.o2{width:350px;height:350px;background:rgba(224,64,251,0.12);bottom:-100px;right:-100px;animation-delay:-5s;}
+.o3{width:280px;height:280px;background:rgba(0,255,247,0.06);top:40%;right:10%;animation-delay:-10s;}
+@keyframes orbf{0%,100%{transform:translate(0,0) scale(1);}40%{transform:translate(25px,-20px) scale(1.06);}70%{transform:translate(-15px,25px) scale(0.94);}}
+
+.header{position:sticky;top:0;z-index:100;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,1,15,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon),0 0 20px var(--neon);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.back-btn{font-family:'Space Mono',monospace;font-size:11px;color:var(--dim);text-decoration:none;border:1px solid rgba(122,106,153,0.3);padding:6px 14px;border-radius:4px;transition:all 0.2s;letter-spacing:.5px;}
+.back-btn:hover{color:var(--p1);border-color:var(--p1);}
+
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:20px 14px 80px;width:100%;}
+
+.hero{text-align:center;padding:20px 0 44px;animation:heroIn 0.8s cubic-bezier(.16,1,.3,1) both;}
+@keyframes heroIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(180,79,255,0.1);border:1px solid rgba(180,79,255,0.3);border-radius:20px;padding:5px 14px;font-size:11px;font-family:'Space Mono',monospace;color:var(--p1);letter-spacing:1px;margin-bottom:20px;text-transform:uppercase;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--neon);border-radius:50%;box-shadow:0 0 8px var(--neon);animation:blink 1.5s infinite;}
+.hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(44px,11vw,76px);font-weight:700;line-height:1;letter-spacing:-1px;margin-bottom:12px;}
+.hero-title .q{color:var(--p1);text-shadow:0 0 30px rgba(180,79,255,0.6);}
+.hero-title .hub{color:transparent;-webkit-text-stroke:2px var(--neon2);filter:drop-shadow(0 0 8px var(--neon2));}
+.hero-sub{font-size:12px;color:var(--dim);font-family:'Space Mono',monospace;letter-spacing:.5px;}
+
+.stats-bar{display:flex;gap:0;justify-content:center;margin-bottom:28px;background:rgba(180,79,255,0.06);border:1px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeUp 0.6s 0.2s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.stat{flex:1;padding:16px 12px;text-align:center;border-right:1px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:var(--p1);display:block;line-height:1;text-shadow:0 0 20px rgba(180,79,255,0.5);}
+.stat-label{font-size:9px;color:var(--dim);font-family:'Space Mono',monospace;letter-spacing:.5px;text-transform:uppercase;margin-top:3px;display:block;}
+
+.tabs-wrap{display:flex;gap:2px;margin-bottom:28px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:4px;animation:fadeUp 0.6s 0.3s both;}
+.tab-btn{flex:1;background:transparent;border:none;color:var(--dim);font-family:'Noto Sans Devanagari',sans-serif;font-size:13px;font-weight:600;padding:10px 8px;border-radius:8px;cursor:pointer;transition:all 0.25s;}
+.tab-btn.active{background:linear-gradient(135deg,var(--p2),var(--p1));color:#fff;font-weight:700;box-shadow:0 2px 20px rgba(180,79,255,0.4);}
+.tab-btn:not(.active):hover{color:var(--white);background:rgba(180,79,255,0.08);}
+
+.class-section{display:none;}
+.class-section.active{display:block;}
+.section-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:16px;padding-left:4px;}
+
+.subject-section{margin-bottom:10px;border-radius:14px;border:1px solid rgba(255,255,255,0.05);background:var(--card);overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s;}
+.subject-section.open{border-color:rgba(180,79,255,0.35);box-shadow:0 0 20px rgba(180,79,255,0.08);}
+.subject-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;transition:background 0.2s;position:relative;}
+.subject-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--p1),var(--neon));border-radius:0 2px 2px 0;transform:scaleY(0);transition:transform 0.3s;}
+.subject-section.open .subject-header::before{transform:scaleY(1);}
+.subject-header:hover{background:rgba(180,79,255,0.06);}
+.subject-icon{font-size:20px;flex-shrink:0;}
+.subject-name{font-size:15px;font-weight:700;color:var(--white);flex:1;}
+.subject-count{font-family:'Space Mono',monospace;font-size:10px;color:var(--p1);background:rgba(180,79,255,0.1);border:1px solid rgba(180,79,255,0.2);padding:3px 10px;border-radius:20px;flex-shrink:0;}
+.subject-arrow{color:var(--dim);font-size:10px;transition:transform 0.3s;flex-shrink:0;}
+.subject-section.open .subject-arrow{transform:rotate(180deg);}
+
+.chapter-list{display:none;padding:4px 12px 14px;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;border-top:1px solid rgba(255,255,255,0.04);}
+.subject-section.open .chapter-list{display:grid;animation:listIn 0.3s ease both;}
+@keyframes listIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+
+.chapter-card{border-radius:10px;padding:10px 12px;text-decoration:none;color:var(--dim);display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);transition:all 0.2s;cursor:default;}
+a.chapter-card{color:var(--white);background:rgba(180,79,255,0.08);border:1px solid rgba(180,79,255,0.25);cursor:pointer;}
+a.chapter-card:hover{background:rgba(180,79,255,0.18);border-color:var(--p1);transform:translateY(-2px);box-shadow:0 6px 20px rgba(180,79,255,0.2);}
+.chapter-num{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;background:rgba(122,106,153,0.15);color:var(--dim);flex-shrink:0;}
+a.chapter-card .chapter-num{background:rgba(180,79,255,0.2);color:var(--p1);box-shadow:0 0 8px rgba(180,79,255,0.2);}
+.chapter-name{font-size:12px;font-weight:500;line-height:1.3;color:inherit;}
+.soon-tag{display:inline-block;font-size:8px;font-family:'Space Mono',monospace;color:rgba(122,106,153,0.7);background:rgba(122,106,153,0.08);border:1px solid rgba(122,106,153,0.15);border-radius:3px;padding:1px 5px;margin-left:4px;vertical-align:middle;letter-spacing:.5px;}
+
+.scroll-top{position:fixed;bottom:24px;right:20px;width:40px;height:40px;background:linear-gradient(135deg,var(--p2),var(--p1));border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:50;font-size:16px;color:#fff;box-shadow:0 4px 20px rgba(180,79,255,0.5);opacity:0;transition:opacity 0.3s;border:none;}
+.scroll-top.visible{opacity:1;}
+
+/* ===== FULL RESPONSIVE FIX ===== */
+
+/* Mobile S - 360px */
+@media(max-width:360px){
+  main{padding:16px 10px 70px;}
+  .hero{padding:14px 0 28px;}
+  .hero-title{font-size:36px;}
+  .hero-badge{font-size:9px;padding:4px 10px;letter-spacing:.5px;}
+  .hero-sub{font-size:9px;}
+  .stats-bar{margin-bottom:18px;}
+  .stat{padding:10px 4px;}
+  .stat-num{font-size:18px;}
+  .stat-label{font-size:7px;letter-spacing:0;}
+  .tabs-wrap{margin-bottom:18px;}
+  .tab-btn{font-size:10px;padding:8px 3px;}
+  .subject-name{font-size:12px;}
+  .subject-icon{font-size:16px;}
+  .subject-header{padding:12px 12px;gap:8px;}
+  .subject-count{font-size:9px;padding:2px 7px;}
+  .chapter-list{grid-template-columns:1fr 1fr;gap:5px;padding:4px 8px 10px;}
+  .chapter-card{padding:7px 8px;gap:6px;}
+  .chapter-name{font-size:10px;}
+  .chapter-num{width:24px;height:24px;font-size:7px;border-radius:6px;}
+}
+
+/* Mobile M - 361 to 414px */
+@media(min-width:361px) and (max-width:414px){
+  main{padding:18px 12px 70px;}
+  .hero{padding:16px 0 30px;}
+  .hero-title{font-size:42px;}
+  .hero-badge{font-size:10px;}
+  .stat{padding:12px 6px;}
+  .stat-num{font-size:20px;}
+  .tab-btn{font-size:11px;padding:9px 5px;}
+  .subject-name{font-size:13px;}
+  .subject-header{padding:13px 14px;}
+  .chapter-list{grid-template-columns:1fr 1fr;gap:6px;padding:4px 10px 12px;}
+  .chapter-card{padding:8px 10px;}
+  .chapter-name{font-size:11px;}
+  .chapter-num{width:26px;height:26px;font-size:8px;}
+}
+
+/* Mobile L - 415 to 480px */
+@media(min-width:415px) and (max-width:480px){
+  main{padding:20px 14px 70px;}
+  .hero-title{font-size:50px;}
+  .chapter-list{grid-template-columns:1fr 1fr;gap:7px;}
+  .chapter-name{font-size:11px;}
+}
+
+/* Tablet - 481 to 768px */
+@media(min-width:481px) and (max-width:768px){
+  main{padding:28px 20px 70px;}
+  .hero-title{font-size:60px;}
+  .chapter-list{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));}
+}
+
+/* Touch - finger friendly */
+@media(hover:none) and (pointer:coarse){
+  .subject-header{min-height:50px;}
+  .chapter-card{min-height:44px;}
+  .tab-btn{min-height:40px;}
+}
+</style>
+</head>
+<body>
+<div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<div class="header">
+  <a href="./" class="logo"><span class="logo-dot"></span>आदित्य कोचिंग</a>
+  <a href="./" class="back-btn">← BACK</a>
+</div>
+
+<main>
+  <div class="hero">
+    <div class="hero-badge">Bihar Board • Chapter Quiz</div>
+    <h1 class="hero-title"><span class="q">Quiz</span> <span class="hub">Hub</span></h1>
+    <p class="hero-sub">// Chapter-wise MCQ — Class 10th · 12th · Competitive</p>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num" id="total-subjects">0</span><span class="stat-label">Subjects</span></div>
+    <div class="stat"><span class="stat-num" id="total-chapters">0</span><span class="stat-label">Chapters</span></div>
+    <div class="stat"><span class="stat-num" id="ready-quizzes">0</span><span class="stat-label">Live Quizzes</span></div>
+  </div>
+
+  <div class="tabs-wrap">
+    <button class="tab-btn active" onclick="switchClass('c10',this)">📚 Class 10th</button>
+    <button class="tab-btn" onclick="switchClass('c12',this)">📗 Class 12th</button>
+    <button class="tab-btn" onclick="switchClass('comp',this)">🏆 Competitive</button>
+  </div>
+
+  <div id="quizData"></div>
+</main>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function buildAll(){
+  var c=document.getElementById('quizData');c.innerHTML='';
+  var labels={c10:'// CLASS 10TH',c12:'// CLASS 12TH',comp:'// COMPETITIVE EXAMS'};
+  var ts=0,tc=0,rq=0;
+
+  ['c10','c12','comp'].forEach(function(cls){
+    var div=document.createElement('div');
+    div.className='class-section'+(cls==='c10'?' active':'');
+    div.id=cls;
+    div.style.display=cls==='c10'?'block':'none';
+
+    var lbl=document.createElement('div');
+    lbl.className='section-label';
+    lbl.textContent=labels[cls];
+    div.appendChild(lbl);
+
+    QUIZ_DATA[cls].forEach(function(sub){
+      ts++;
+      var ready=sub.chapters.filter(function(ch){return ch.file!=='';}).length;
+      rq+=ready; tc+=sub.chapters.length;
+
+      var sec=document.createElement('div');
+      sec.className='subject-section';
+      sec.id='sub-'+sub.id;
+
+      var hdr=document.createElement('div');
+      hdr.className='subject-header';
+      hdr.onclick=function(){toggleSubject('sub-'+sub.id);};
+      hdr.innerHTML='<span class="subject-icon">'+sub.icon+'</span>'+
+        '<span class="subject-name">'+sub.name+'</span>'+
+        '<span class="subject-count">'+ready+' / '+sub.chapters.length+'</span>'+
+        '<span class="subject-arrow">▼</span>';
+
+      var lst=document.createElement('div');
+      lst.className='chapter-list';
+
+      sub.chapters.forEach(function(ch,i){
+        var card;
+        if(ch.file){
+          card=document.createElement('a');
+          card.href='/'+ch.file;
+          card.target='_blank';
+          card.className='chapter-card';
+        } else {
+          card=document.createElement('div');
+          card.className='chapter-card';
+        }
+        card.innerHTML='<div class="chapter-num">CH'+(i+1)+'</div>'+
+          '<div class="chapter-name">'+ch.name+(ch.file?'':'<span class="soon-tag">soon</span>')+'</div>';
+        lst.appendChild(card);
+      });
+
+      sec.appendChild(hdr);
+      sec.appendChild(lst);
+      div.appendChild(sec);
+    });
+    c.appendChild(div);
+  });
+
+  anim('total-subjects',ts);
+  anim('total-chapters',tc);
+  anim('ready-quizzes',rq);
+}
+
+function anim(id,target){
+  var el=document.getElementById(id),start=null;
+  function step(ts){
+    if(!start)start=ts;
+    var p=Math.min((ts-start)/1200,1),e=1-Math.pow(1-p,3);
+    el.textContent=Math.floor(e*target);
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function switchClass(cls,btn){
+  document.querySelectorAll('.class-section').forEach(function(s){
+    s.classList.remove('active');s.style.display='none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(t){t.classList.remove('active');});
+  var el=document.getElementById(cls);
+  el.classList.add('active');
+  el.style.display='block';
+  btn.classList.add('active');
+}
+
+function toggleSubject(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+window.addEventListener('scroll',function(){
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
+
+buildAll();
+</script>
+</body>
+</html>
