@@ -16,7 +16,7 @@ var QUIZ_DATA = {
     // 📐 गणित
     {id:'10-math', icon:'📐', name:'गणित', chapters:[
       {name:'वास्तविक संख्याएँ',              file:'1Quiz.html'},
-      {name:'बहुपद',                          file:''},
+      {name:'बहुपद',                          file:'2quiz.html'},
       {name:'द्विघात समीकरण',                 file:''},
       {name:'दो चर वाले रैखिक समीकरण',        file:''},
       {name:'अंकगणित श्रेढ़ी',                 file:''},
