@@ -1,0 +1,299 @@
+<div id="WRAP_Ncr13"></div>
+
+<style>
+    :root { 
+        --p: #6c5ce7; --s: #00b894; --e: #ff7675; 
+        --n: #ff007f; --dark: #1e293b;
+        --accent: #00d2ff;
+    }
+    .q-card { width: 95%; max-width: 420px; background: #fff; border-radius: 30px; padding: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.12); margin: 20px auto; font-family: 'Poppins', sans-serif; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; position: relative; }
+    
+    .lb-card { background: #0f172a; border-radius: 20px; padding: 18px; border: 2px solid var(--n); margin-bottom: 25px; color: #fff; text-align: center; position: relative; }
+    
+    /* सिर्फ इसी हिस्से को बदलें, बाकी सब वैसा ही रहने दें */
+.lb-head { 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+    color: var(--accent); 
+    margin-bottom: 12px; 
+    font-weight: 800; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+    white-space: nowrap; /* यह टेक्स्ट को एक लाइन में रखेगा */
+    flex-wrap: nowrap;   /* यह डॉट को नीचे जाने से रोकेगा */
+}
+
+.live-dot { 
+    height: 10px; 
+    width: 10px; 
+    background-color: #ff0000; 
+    border-radius: 50%; 
+    flex-shrink: 0;      /* यह डॉट को दबने या गायब होने से बचाएगा */
+    display: inline-block; 
+    box-shadow: 0 0 12px #ff0000; 
+    animation: blink 1s infinite; 
+}
+
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+    
+    /* --- RE-ACTIVATED TIMER PROGRESS BAR --- */
+    .t-wrap { width: 100%; height: 10px; background: #f1f5f9; border-radius: 10px; margin-bottom: 25px; overflow: hidden; border: 1px solid #eee; }
+    .t-bar { width: 100%; height: 100%; background: linear-gradient(90deg, var(--n), var(--p)); transition: width 1s linear; }
+
+    .opt { background: #f8fafc; border: 2px solid #f1f5f9; padding: 16px; border-radius: 18px; margin-bottom: 12px; cursor: pointer; font-weight: 600; color: #475569; display: flex; align-items: center; transition: all 0.2s ease; }
+    .opt.ok { background: var(--s) !important; color: #fff !important; animation: pop 0.4s ease; box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4); }
+    .opt.no { background: var(--e) !important; color: #fff !important; animation: shake 0.4s ease; }
+    
+    @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+    .score-box { background: linear-gradient(135deg, #6c5ce7, #8e7dff); color: white; padding: 40px 20px; border-radius: 35px; text-align: center; margin-bottom: 25px; position: relative; box-shadow: 0 15px 35px rgba(108, 92, 231, 0.3); }
+    .confetti { position: absolute; width: 8px; height: 8px; top: -20px; border-radius: 50%; animation: fall 3s linear infinite; z-index: 10; }
+    @keyframes fall { to { transform: translateY(500px) rotate(360deg); opacity: 0; } }
+
+    .rank-1 { color: var(--n); font-size: 28px; font-weight: 900; text-shadow: 0 0 15px var(--n); display: block; }
+    .rank-2, .rank-3 { font-size: 16px; margin-top: 5px; font-weight: 600; }
+    .opt.lock { pointer-events: none; opacity: 0.8; }
+    .btn-music { background: #fff; color: var(--p); border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; position: absolute; top: 10px; right: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .btn-wa-sm { width: fit-content; min-width: 170px; padding: 14px 22px; background: #25D366; color: white; border-radius: 50px; font-size: 14px; margin: 15px auto; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; text-decoration: none; }
+    .btn-v { width: 100%; padding: 16px; border: none; border-radius: 18px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+    .btn-p { background: var(--p); color: white; }
+    .btn-sec { background: #f1f5f9; color: #475569; border: 1px dashed #cbd5e1; }
+</style>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const VER = "Ncr13"; 
+    const WRAPPER_ID = "WRAP_Ncr13"; 
+
+    (function(V, W_ID) {
+        const ID = (n) => n + "_" + V;
+        const container = document.getElementById(W_ID);
+
+        container.innerHTML = `
+            <div class="q-card">
+                <div class="lb-card">
+                    <span class="lb-head"><span class="live-dot"></span> Global League Board (LIVE) 🏆</span>
+                    <div id="${ID('r1')}" class="rank-1">Quiz प्रारंभ करें...</div>
+                    <div id="${ID('r2')}" class="rank-2"></div>
+                    <div id="${ID('r3')}" class="rank-3"></div>
+                </div>
+                <div id="${ID('start')}">
+                   <h2 style="text-align:center; font-weight:bold; font-size:34px;">
+  <span style="color:#ff9933;">वि</span>
+  <span style="color:#000080;">ज्ञा</span>
+  <span style="color:#138808;">न</span>
+</h2>
+                    <p style="text-align:center; color:#666; font-size:14px; margin-bottom:20px;">7 महत्वपूर्ण प्रश्न | मानव नेत्र</p>
+                    <input type="text" id="${ID('inp')}" style="width:100%; box-sizing:border-box; padding:18px; border-radius:15px; border:2px solid #eee; margin-bottom:15px;" placeholder="अपना नाम लिखें...">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:25px;">
+                        <input type="checkbox" id="${ID('chkMusic')}" checked>
+                        <label for="${ID('chkMusic')}" style="font-weight:600; font-size:14px;">Dialogue/Music On रखें? 🎵</label>
+                    </div>
+                    <button class="btn-v btn-p" id="${ID('btnGo')}">क्विज़ शुरू करें ▶</button>
+                </div>
+                <div id="${ID('quiz')}" style="display:none;">
+                    <div class="t-wrap"><div id="${ID('bar')}" class="t-bar"></div></div>
+                    <div id="${ID('qBox')}"></div>
+                </div>
+                <div id="${ID('end')}" style="display:none;"></div>
+            </div>
+        `;
+
+        const cfg = { apiKey: "AIzaSyDeWQuxzkB5GLJiRcxpDCIfN7DCHPK53MY", databaseURL: "https://myquiz-f2c86-default-rtdb.firebaseio.com", projectId: "myquiz-f2c86" };
+        const app = initializeApp(cfg, "INST_" + V);
+        const db = getDatabase(app);
+        const dbRef = ref(db, 'PRO_DATA_' + V + '/results');
+
+        const ting = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+        const buzz = new Audio('https://assets.mixkit.co/active_storage/sfx/2959/2959-preview.mp3');
+        
+        const bollyVibes = [
+            "https://www.dropbox.com/scl/fi/hmf8hn6201ch9g14elwjx/Teri-kaynat-mere-khali-hath-MpThree.in.mp3?rlkey=1sh47dvfw7aro1h42kuzf3fb1&st=gy2ndwke&raw=1",
+            "https://www.dropbox.com/scl/fi/ebq4t1nonu1x92thfmzvp/rajkumar.mp3?rlkey=dhue2h4pmc7ddr1t6hm8aul2c&st=1c7aumu8&raw=1",
+            "https://www.dropbox.com/scl/fi/2tuyx3yib1k19cp2xgc50/3_idiot_dialogue.mp3?rlkey=xakzzyfy4y0qsp1mac8k13b8h&st=ja6uf0cg&raw=1",
+            "https://www.dropbox.com/scl/fi/v48wly359kh9kuvuk61yc/_Pagal_Hai_Amrish_Puri_Dialogue_Ringtone_-by-Fringster.com.mp3?rlkey=r19mjzxq9bpgz2y7g1a4imfl8&st=sevk08p2&raw=1",
+            "https://www.dropbox.com/scl/fi/zf9oc37zrf2lc3dbj9o6p/Kal-Ho-Na-Ho-Flute-Ringtone.mp3?rlkey=4fdbk16offsplec82beg8r3h3&st=bvkmvbsw&raw=1",
+            "https://www.dropbox.com/scl/fi/47md4hj6g4wtcctmamawj/saiyaara.mp3?rlkey=nmobs6is2igks08ha1kiow3sf&st=ji7hbful&raw=1",
+            "https://www.dropbox.com/scl/fi/vnmq1a95lio4oi0o1qto7/_Ab_Jaisi_Duniya_Waise_Hum_Ringtone_-by-Fringster.com.mp3?rlkey=awsf911k21zm8fvj9nh59dd5d&st=5uonfa2l&raw=1",
+        ];
+
+        let activeMusic = new Audio();
+        let cur = 0, pts = 0, tmr = null, user = "", startTime, history = [], musicAllowed = true;
+
+        const questions = [
+            ["मानव शरीर में हृदय का मुख्य कार्य क्या है?", ["श्वसन", "पाचन", "रक्त संचार", "उत्सर्जन"], 2],
+            ["वायुमंडल में सबसे अधिक मात्रा में कौन सी गैस पाई जाती है?", ["ऑक्सीजन", "कार्बन डाइऑक्साइड", "नाइट्रोजन", "आर्गन"], 2],
+            ["मानव नेत्र में किसी वस्तु का प्रतिबिंब कहां बनता है?", ["कॉर्निया", "परितारिका", "पुतली", "रेटिना"], 3],
+            ["सामान्य नेत्र के लिए निकट बिंदु (Near Point) क्या है?", ["25 cm", "25 m", "2.5 cm", "अनंत"], 0],
+            ["आकाश का रंग नीला क्यों दिखाई देता है?", ["परावर्तन", "अपवर्तन", "प्रकीर्णन", "विक्षेपण"], 2],
+            ["नेत्र दान में नेत्र का कौन सा भाग दान किया जाता है?", ["रेटिना", "कॉर्निया", "पूरा नेत्र", "लेंस"], 1],
+            ["श्वेत प्रकाश कितने रंगों का मिश्रण है?", ["5", "6", "7", "8"], 2]
+        ];
+
+                /* --- फाइनल लीडरबोर्ड: लॉजिक (Score + Time) | दिखावट (Sirf Score) --- */
+        onValue(dbRef, (s) => {
+            const d = s.val(); 
+            if(d) {
+                // 1. डेटा को ऑब्जेक्ट से लिस्ट में बदलें
+                const p = Object.values(d);
+
+                // 2. सॉर्टिंग लॉजिक (Rank System) - ये अंदर ही अंदर Time चेक करेगा
+                p.sort((a, b) => {
+                    const scoreA = parseInt(a.s || 0);
+                    const scoreB = parseInt(b.s || 0);
+                    const timeA = parseInt(a.t || 0); 
+                    const timeB = parseInt(b.t || 0);
+
+                    // नियम: पहले ज्यादा स्कोर, अगर स्कोर बराबर तो कम समय
+                    if (scoreB !== scoreA) {
+                        return scoreB - scoreA;
+                    } else {
+                        return timeA - timeB; 
+                    }
+                });
+
+                // 3. टॉप 3 खिलाड़ियों को निकालें
+                const top3 = p.slice(0, 3);
+
+                // 4. HTML अपडेट करें (यहाँ से Time हटा दिया गया है)
+                document.getElementById(ID('r1')).innerHTML = top3[0] ? `🥇 ${top3[0].n} (${top3[0].s} Pts)` : "---";
+                document.getElementById(ID('r2')).innerHTML = top3[1] ? `🥈 ${top3[1].n} (${top3[1].s} Pts)` : "---";
+                document.getElementById(ID('r3')).innerHTML = top3[2] ? `🥉 ${top3[2].n} (${top3[2].s} Pts)` : "---";
+            }
+        });
+
+
+
+        document.getElementById(ID('btnGo')).onclick = () => {
+            user = document.getElementById(ID('inp')).value.trim();
+            musicAllowed = document.getElementById(ID('chkMusic')).checked;
+            if(!user) return alert("नाम लिखें!");
+            if(musicAllowed) {
+                activeMusic.src = bollyVibes[Math.floor(Math.random() * bollyVibes.length)];
+                activeMusic.load(); 
+                activeMusic.play().then(() => { activeMusic.pause(); activeMusic.currentTime = 0; }).catch(() => {});
+            }
+            cur = 0; pts = 0; history = [];
+            startTime = Date.now();
+            document.getElementById(ID('start')).style.display = 'none';
+            document.getElementById(ID('end')).style.display = 'none';
+            document.getElementById(ID('quiz')).style.display = 'block';
+            next();
+        };
+
+        function next() {
+            if(cur >= questions.length) return end();
+            
+            // --- NEW: Reset Sound & Progress Bar for Each Question ---
+            ting.pause(); buzz.pause(); // पिछला साउंड बंद
+            ting.currentTime = 0; buzz.currentTime = 0;
+
+            let left = 15; 
+            clearInterval(tmr);
+            const bar = document.getElementById(ID('bar'));
+            bar.style.transition = 'none'; // तुरंत 100% करने के लिए
+            bar.style.width = '100%';
+            setTimeout(() => bar.style.transition = 'width 1s linear', 50); // एनीमेशन वापस ऑन
+
+            const box = document.getElementById(ID('qBox'));
+            box.innerHTML = `<div style="font-weight:800; font-size:19px; margin-bottom:20px;">${cur+1}. ${questions[cur][0]}</div>` +
+                questions[cur][1].map((o, i) => `<div class="opt" data-i="${i}">${o}</div>`).join('');
+
+            box.querySelectorAll('.opt').forEach(el => {
+                el.onclick = () => {
+                    clearInterval(tmr);
+                    const sel = parseInt(el.dataset.i), cor = questions[cur][2];
+                    box.querySelectorAll('.opt').forEach(o => o.classList.add('lock'));
+                    history.push({ q: questions[cur][0], opts: questions[cur][1], corIdx: cor, userIdx: sel });
+                    
+                    if(sel === cor) { 
+                        pts++; el.classList.add('ok'); ting.play(); 
+                    } else { 
+                        el.classList.add('no'); box.querySelectorAll('.opt')[cor].classList.add('ok'); buzz.play(); 
+                    }
+                    
+                    cur++; 
+                    setTimeout(next, 800);
+                };
+            });
+
+            tmr = setInterval(() => {
+                left--; 
+                bar.style.width = (left/15*100) + "%";
+                if(left <= 0) { 
+                    clearInterval(tmr); 
+                    history.push({ q: questions[cur][0], opts: questions[cur][1], corIdx: questions[cur][2], userIdx: -1 }); 
+                    cur++; next(); 
+                }
+            }, 1000);
+        }
+
+        function spawnConfetti() {
+            const colors = ['#ffd700', '#ff007f', '#00d2ff', '#25D366', '#ffffff'];
+            for(let i=0; i<40; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + "%";
+                c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+                c.style.animationDelay = Math.random() * 2 + "s";
+                document.getElementById(ID('end')).appendChild(c);
+            }
+        }
+
+        function end() {
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            document.getElementById(ID('quiz')).style.display = 'none';
+            if(musicAllowed) activeMusic.play().catch(() => {});
+
+            const hasPlayed = localStorage.getItem("played_" + V);
+            if(!hasPlayed) {
+                push(dbRef, { n: user.toUpperCase(), s: pts, t: timeTaken });
+                localStorage.setItem("played_" + V, "true");
+            }
+
+            const currentUrl = window.location.href.split('?')[0].split('#')[0];
+            const shareMsg = encodeURIComponent(`👤 *नाम:* ${user.toUpperCase()}\n🏆 *स्कोर:* ${pts}/${questions.length}\n🎯 *क्विज़ लिंक:* ${currentUrl}`);
+            const endBox = document.getElementById(ID('end'));
+            endBox.className = 'res-anim';
+            endBox.style.display = 'block';
+            endBox.innerHTML = `
+                <div class="score-box">
+                    <button class="btn-music" id="${ID('mToggle')}">🎵</button>
+                    <h1 style="font-size:70px; margin:0; font-weight:900;">${pts}/${questions.length}</h1>
+                    <div style="margin-top:15px; font-weight:700; background:rgba(255,255,255,0.25); display:inline-block; padding:8px 20px; border-radius:50px;">समय: ${timeTaken}s</div>
+                </div>
+                <button class="btn-v btn-sec" id="${ID('btnRev')}">विस्तृत उत्तर देखें ⬇</button>
+                <div id="${ID('revList')}" style="display:none;">
+                    ${history.map(h => `<div class="rev-item"><b>${h.q}</b>${h.opts.map((o, idx) => `<div class="rev-o ${idx === h.corIdx ? 'correct' : (idx === h.userIdx ? 'wrong' : '')}">${o}</div>`).join('')}</div>`).join('')}
+                </div>
+                <div style="display: flex; justify-content: center; width: 100%;"><a href="https://wa.me/?text=${shareMsg}" class="btn-wa-sm" target="_blank">WhatsApp Share 📲</a></div>
+                <button class="btn-v btn-p" id="${ID('btnRestart')}">दोबारा चुनौती स्वीकारें 🔄</button>
+            `;
+            
+            if(pts >= 3) spawnConfetti();
+
+            document.getElementById(ID('btnRev')).onclick = () => {
+                const list = document.getElementById(ID('revList'));
+                list.style.display = list.style.display === 'none' ? 'block' : 'none';
+            };
+            document.getElementById(ID('btnRestart')).onclick = () => {
+                activeMusic.pause(); activeMusic.currentTime = 0;
+                cur = 0; pts = 0; history = [];
+                document.getElementById(ID('end')).style.display = 'none';
+                document.getElementById(ID('start')).style.display = 'block';
+                window.scrollTo(0,0);
+            };
+            document.getElementById(ID('mToggle')).onclick = (e) => { 
+                e.stopPropagation();
+                if(activeMusic.paused) activeMusic.play(); else activeMusic.pause(); 
+            };
+        }
+    })(VER, WRAPPER_ID);
+</script>
