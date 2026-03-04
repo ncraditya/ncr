@@ -26,13 +26,13 @@ body { background: var(--bg); font-family: 'Exo 2', sans-serif; color: var(--tex
 
 #app { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 12px 10px 30px; padding-top: max(12px, env(safe-area-inset-top)); }
 
-.screen { display: none; width: 100%; max-width: 520px; animation: screenIn .4s cubic-bezier(.16,1,.3,1); }
+.screen { display: none; width: 100%; max-width: 520px; animation: screenIn .4s cubic-bezier(.16,1,.3,1); margin: auto; }
 .screen.active { display: block; }
 @keyframes screenIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: none; } }
 
 .card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 20px 16px;
-  backdrop-filter: blur(15px); box-shadow: 0 0 50px rgba(0, 212, 255, 0.1);
+  backdrop-filter: blur(15px); box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 50px rgba(0, 212, 255, 0.1);
   position: relative; overflow: hidden; text-align: center;
   z-index: 10; width: 100%;
 }
@@ -111,7 +111,7 @@ h1 {
 .timer-bar { height: 6px; background: #222; border-radius: 10px; margin-bottom: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
 .timer-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--blue)); width: 100%; transition: width 1s linear; box-shadow: 0 0 10px var(--blue); }
 .q-text { font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 20px; color: #fff; text-align: left; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
-.opt { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); padding: 14px 18px; border-radius: 12px; margin-bottom: 8px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--dim); transition: 0.2s; display: flex; align-items: center; gap: 10px; text-align: left; }
+.opt { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); padding: 14px 18px; border-radius: 12px; margin-bottom: 8px; cursor: pointer; font-size: 14px; font-weight: 600; color: #fff; transition: 0.2s; display: flex; align-items: center; gap: 10px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
 .opt:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: var(--blue); box-shadow: 0 0 10px rgba(0,212,255,0.2); }
 .opt.correct { background: rgba(6, 255, 165, 0.15); border-color: var(--green); color: var(--green); box-shadow: 0 0 15px rgba(6,255,165,0.3); }
 .opt.wrong { background: rgba(255, 56, 96, 0.15); border-color: var(--red); color: var(--red); box-shadow: 0 0 15px rgba(255,56,96,0.3); }
