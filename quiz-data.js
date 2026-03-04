@@ -15,7 +15,7 @@ var QUIZ_DATA = {
 
     // 📐 गणित
     {id:'10-math', icon:'📐', name:'गणित', chapters:[
-      {name:'वास्तविक संख्याएँ',              file:''},
+      {name:'वास्तविक संख्याएँ',              file:'1Quiz.html'},
       {name:'बहुपद',                          file:''},
       {name:'द्विघात समीकरण',                 file:''},
       {name:'दो चर वाले रैखिक समीकरण',        file:''},
