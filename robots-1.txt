@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap link for Google
+Sitemap: https://ncr-9sh.pages.dev/sitemap.xml
