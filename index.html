@@ -1249,7 +1249,11 @@ footer{background:var(--dark)}
         body: JSON.stringify({
           keyIndex: currentKeyIndex,
           systemInstruction: { parts: [{ text: SYSTEM }] },
-          contents: contents,
+          contents: [
+  {role: "user", parts: [{text: "Aaj se sirf Hindi mein baat karo"}]},
+  {role: "model", parts: [{text: "जी हाँ! मैं हमेशा हिंदी में जवाब दूंगा।"}]},
+  ...contents
+],
           generationConfig: { maxOutputTokens: 1500, temperature: 0.7 }
         })
       }).then(function(res) { return res.json(); })
