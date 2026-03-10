@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Community - Google Help Clone</title>
+    <style>
+        /* Reset aur Basic Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            color: #202124;
+        }
+
+        /* Top Header */
+        header {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            border-bottom: 1px solid #dadce0;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 400;
+            color: #5f6368;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo span {
+            color: #1a73e8;
+            font-weight: 500;
+        }
+        .search-bar {
+            margin-left: 60px;
+            background: #f1f3f4;
+            padding: 12px 16px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            border: none;
+            font-size: 16px;
+            color: #5f6368;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            padding: 0 24px;
+            border-bottom: 1px solid #dadce0;
+        }
+        .nav-tab {
+            padding: 14px 24px;
+            color: #5f6368;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+        .nav-tab.active {
+            color: #1a73e8;
+            border-bottom-color: #1a73e8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1032px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .banner {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .banner h1 {
+            font-size: 36px;
+            font-weight: 400;
+            color: #202124;
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+        .main-content {
+            flex: 1;
+        }
+        .sidebar {
+            width: 300px;
+        }
+
+        /* Section Headings */
+        .section-title {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: #202124;
+        }
+
+        /* Post Cards */
+        .post-card {
+            background: #ffffff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: box-shadow 0.2s;
+        }
+        .post-card:hover {
+            box-shadow: 0 1px 3px rgba(60,64,67,0.3);
+        }
+        .post-title {
+            font-size: 18px;
+            color: #1a0dab;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-weight: 400;
+        }
+        .post-title:hover {
+            text-decoration: underline;
+        }
+        .post-snippet {
+            font-size: 14px;
+            color: #3c4043;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .post-meta {
+            font-size: 12px;
+            color: #5f6368;
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Sidebar Elements */
+        .btn-ask {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-ask:hover {
+            background: #1557b0;
+            box-shadow: 0 1px 2px rgba(60,64,67,0.3);
+        }
+        .sidebar-box {
+            margin-top: 24px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 16px 0;
+        }
+        .sidebar-box h3 {
+            font-size: 16px;
+            padding: 0 16px 12px 16px;
+            border-bottom: 1px solid #dadce0;
+        }
+        .sidebar-box ul {
+            list-style: none;
+        }
+        .sidebar-box li {
+            padding: 12px 16px;
+            color: #1a0dab;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .sidebar-box li:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span>YouTube</span> Help
+        </div>
+        <input type="text" class="search-bar" placeholder="Describe your issue">
+    </header>
+
+    <div class="nav-tabs">
+        <div class="nav-tab">Help Center</div>
+        <div class="nav-tab active">Community</div>
+        <div class="nav-tab">Creator Tips</div>
+    </div>
+
+    <div class="container">
+        
+        <div class="banner">
+            <h1>Welcome to the YouTube Help Community</h1>
+        </div>
+
+        <div class="layout">
+            <div class="main-content">
+                <h2 class="section-title">Featured posts</h2>
+                
+                <div class="post-card">
+                    <h3 class="post-title">New for streamers: transition from a public to a members-only live stream! 🔴</h3>
+                    <p class="post-snippet">Hi creators, We're excited to share a new feature that will help you easily create special members-only content...</p>
+                    <div class="post-meta">
+                        <span>0 Recommended Answers</span>
+                        <span>6109 Replies</span>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <h3 class="post-title">An Update on YouTube View Counts and Restricted Mode</h3>
+                    <p class="post-snippet">Hi Creators, We know seeing your view count drop is frustrating, especially when you can't pinpoint why. We wanted to give an update...</p>
+                    <div class="post-meta">
+                        <span>0 Recommended Answers</span>
+                        <span>876 Replies</span>
+                        <span>2309 Upvotes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <button class="btn-ask">Post a question</button>
+                <div style="margin-top: 12px; font-size: 13px; color: #5f6368; text-align: center;">
+                    Not what you're looking for? Try posting to the public help community.
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <li>Known Issues</li>
+                        <li>New Features</li>
+                        <li>Feature Experiments</li>
+                        <li>About the Community</li>
+                        <li>Community Overview</li>
+                        <li>Content Policy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
