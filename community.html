@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Help Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #3c4043;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1a73e8;
+        }
+
+        /* Header */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 24px;
+            border-bottom: 1px solid #dadce0;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            color: #5f6368;
+            margin-right: 20px;
+            padding-bottom: 12px;
+        }
+
+        .nav-links a.active {
+            color: #1a73e8;
+            border-bottom: 2px solid #1a73e8;
+            font-weight: 500;
+        }
+
+        .nav-right a {
+            color: #5f6368;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Banner */
+        .info-banner {
+            background-color: #e8f0fe;
+            color: #1967d2;
+            padding: 12px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-banner .close-btn {
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: url('hero-bg-placeholder.png') no-repeat center bottom;
+            background-size: contain;
+        }
+
+        .yt-logo {
+            width: 40px;
+            margin-bottom: 10px;
+        }
+
+        .hero-section h1 {
+            font-size: 28px;
+            color: #1a73e8;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            margin-left: 12px;
+        }
+
+        .search-box .material-icons {
+            color: #5f6368;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-block {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+            color: #3c4043;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .view-all {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Lists and Cards */
+        .card-list {
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .list-item {
+            display: flex;
+            padding: 16px;
+            border-bottom: 1px solid #dadce0;
+            align-items: flex-start;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item .material-icons {
+            margin-right: 16px;
+            font-size: 20px;
+        }
+
+        .icon-blue { color: #1a73e8; }
+        .icon-green { color: #1e8e3e; }
+        .icon-orange { color: #f9ab00; }
+        .icon-red { color: #d93025; }
+
+        .item-content h3 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .item-content p {
+            font-size: 13px;
+            color: #5f6368;
+        }
+
+        .replies {
+            font-size: 12px;
+            color: #5f6368;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .links-row {
+            padding: 16px 0;
+            font-size: 13px;
+            color: #5f6368;
+        }
+
+        .ask-question-box {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 14px;
+        }
+
+        .ask-question-box .material-icons {
+            color: #1a73e8;
+            margin-right: 12px;
+        }
+
+        .post-btn {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #1a73e8;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .category-card {
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .category-card h3 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .category-card ul {
+            list-style: none;
+        }
+
+        .category-card ul li {
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            color: #3c4043;
+        }
+
+        .category-card ul li .material-icons {
+            font-size: 18px;
+            margin-right: 12px;
+        }
+
+        .view-all-link {
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* New Sections Added for YouTube Community Page */
+        .section-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-header-flex h2 {
+            font-size: 16px;
+            color: #3c4043;
+            font-weight: 500;
+        }
+
+        .view-all-link-blue {
+            color: #1a73e8;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Videos Grid */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .video-card {
+            background: #f1f3f4;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .video-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-card .duration {
+            position: absolute;
+            bottom: 40px;
+            left: 8px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .video-card p {
+            font-size: 13px;
+            padding: 8px 12px 0;
+            color: #3c4043;
+            font-weight: 500;
+        }
+
+        /* Small Links Row (under featured posts) */
+        .sub-links-row {
+            padding: 16px;
+            font-size: 12px;
+            color: #1a73e8;
+            border-top: 1px solid #dadce0;
+            line-height: 1.8;
+        }
+
+        .sub-links-row a {
+            color: #1a73e8;
+            margin-right: 8px;
+        }
+
+        /* Updated Ask Question Box to match screenshot */
+        .ask-question-alt {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #dadce0;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        /* Footer Section */
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 20px;
+            border-top: 1px solid #dadce0;
+            font-size: 12px;
+            color: #5f6368;
+            max-width: 860px;
+            margin: 40px auto 0;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: #1a73e8;
+            margin: 0 4px;
+        }
+
+        .footer-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .language-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .language-container label {
+            font-size: 10px;
+            position: absolute;
+            top: -8px;
+            left: 8px;
+            background: #fff;
+            padding: 0 4px;
+        }
+
+        .language-select {
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 8px 12px;
+            color: #3c4043;
+            background: #fff;
+            font-size: 13px;
+            outline: none;
+            min-width: 120px;
+        }
+
+        .settings-icon {
+            color: #5f6368;
+            cursor: pointer;
+        }
+
+        .feedback-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1a73e8;
+            border: 1px solid #dadce0;
+            background: #fff;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* YouTube Shorts Custom Styles */
+        .announcement-badge {
+            background-color: #c6dafc; 
+            color: #1967d2; 
+            font-size: 11px;
+            padding: 3px 6px;
+            border-radius: 3px;
+            margin-left: 12px;
+            font-weight: 500;
+        }
+
+        .payment-link {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a73e8;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="nav-links">
+            <a href="#">Help Center</a>
+            <a href="#" class="active">Community</a>
+            <a href="#">Creator Tips</a>
+        </div>
+        <div class="nav-right">
+            <a href="#">YouTube <span class="material-icons" style="font-size: 16px;">open_in_new</span></a>
+        </div>
+    </header>
+
+    <div class="info-banner">
+        <span>Check out our newly launched <a href="#">YouTube India Help Community</a> for help in English and Hindi!</span>
+        <span class="material-icons close-btn">close</span>
+    </div>
+
+    <section class="hero-section">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube" class="yt-logo">
+        <h1>Welcome to the YouTube Help Community</h1>
+        <div class="search-box">
+            <span class="material-icons">search</span>
+            <input type="text" placeholder="Describe your issue">
+        </div>
+    </section>
+
+    <main class="main-container">
+
+        <div class="section-block">
+            <div class="section-header-flex">
+                <h2>Featured posts</h2>
+                <a href="#" class="view-all-link-blue">View all featured posts <span class="material-icons" style="font-size: 16px;">arrow_forward</span></a>
+            </div>
+            <div class="card-list">
+                <div class="list-item">
+                    <span class="material-icons icon-blue">push_pin</span>
+                    <div class="item-content" style="flex: 1;">
+                        <h3>Issues loading YouTube Studio</h3>
+                        <p>Hi Creators, We're aware some of you are experiencing issues...</p>
+                    </div>
+                    <div class="replies">0 Replies</div>
+                </div>
+                <div class="list-item">
+                    <span class="material-icons icon-blue">push_pin</span>
+                    <div class="item-content" style="flex: 1;">
+                        <h3>New for streamers: transition from a public to a members-only live stream! 🔴</h3>
+                        <p>Hi creators, We're excited to share a new feature...</p>
+                    </div>
+                    <div class="replies">6112 Replies</div>
+                </div>
+                <div class="sub-links-row">
+                    <a href="#">Known Issues</a> - <a href="#">New Features</a> - <a href="#">Feature Experiments</a> - <a href="#">About the Community</a> - <a href="#">Community Overview</a> - <a href="#">Content Policy</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ask-question-alt">
+            <div style="display: flex; align-items: center; gap: 12px; font-size: 13px;">
+                <span class="material-icons icon-blue">people</span>
+                <span><strong>Not what you're looking for?</strong> Try posting to the public help community</span>
+            </div>
+            <a href="#" class="view-all-link-blue">Post a question <span class="material-icons" style="font-size: 16px;">arrow_forward</span></a>
+        </div>
+
+        <div class="section-block">
+            <div class="section-header-flex">
+                <h2>Videos</h2>
+                <a href="#" class="view-all-link-blue">View all videos <span class="material-icons" style="font-size: 16px;">arrow_forward</span></a>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <img src="video-placeholder-1.jpg" alt="Video">
+                    <span class="duration">0:01:06</span>
+                    <p>How to change your default...</p>
+                </div>
+                <div class="video-card">
+                    <img src="video-placeholder-2.jpg" alt="Video">
+                    <span class="duration">0:00:24</span>
+                    <p>How to remove the "For You...</p>
+                </div>
+                <div class="video-card">
+                    <img src="video-placeholder-3.jpg" alt="Video">
+                    <span class="duration">0:04:43</span>
+                    <p>What is a Google Account t...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <div class="section-header-flex">
+                <h2>Categories</h2>
+                <a href="#" class="view-all-link-blue">View all posts</a>
+            </div>
+            <div class="categories-grid">
+                
+                <div class="category-card">
+                    <h3>Watching Videos</h3>
+                    <ul>
+                        <li><span class="material-icons icon-green">account_circle</span> YouTube test features and experiments</li>
+                        <li><span class="material-icons icon-orange">account_circle</span> New Features and Updates for YouTube...</li>
+                    </ul>
+                    <a href="#" class="view-all-link-blue" style="margin-top: 16px;">View all <span class="material-icons" style="font-size: 16px;">arrow_forward</span></a>
+                </div>
+                
+                <div class="category-card">
+                    <h3>Uploading Videos</h3>
+                    <ul>
+                        <li><span class="material-icons icon-red">account_circle</span> Can I upload my videos to YouTube?</li>
+                        <li><span class="material-icons icon-orange">account_circle</span> Updates to reduce comment spam...</li>
+                    </ul>
+                    <a href="#" class="view-all-link-blue" style="margin-top: 16px;">View all <span class="material-icons" style="font-size: 16px;">arrow_forward</span></a>
+                </div>
+
+                <div class="category-card">
+                    <h3>YouTube Shorts</h3>
+                    <div style="border-bottom: 1px solid #dadce0; padding-bottom: 16px; margin-bottom: 16px;">
+                        <div style="display: flex; align-items: center; font-size: 15px; color: #3c4043;">
+                            account verification 976 rs 
+                            <span class="announcement-badge">Announcement</span>
+                        </div>
+                    </div>
+                    <a href="#" class="payment-link">
+                        TOTAL PAYMENT 3602 RS <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer-container">
+        <div class="footer-links">
+            <span>©2026 Google -</span>
+            <a href="#">Privacy Policy</a> - 
+            <a href="#">YouTube Terms of Service</a> - 
+            <a href="#">Community Policy</a>
+            <br><br>
+            <a href="#">Community Overview</a>
+        </div>
+        
+        <div class="footer-controls">
+            <div class="language-container">
+                <label>Language</label>
+                <select class="language-select">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                </select>
+            </div>
+            
+            <span class="material-icons settings-icon" style="font-size: 20px;">settings</span>
+            
+            <button class="feedback-btn">
+                <span class="material-icons icon-blue" style="font-size: 18px;">chat_bubble_outline</span>
+                Send feedback about our Help Center
+            </button>
+        </div>
+    </footer>
+
+</body>
+</html>
