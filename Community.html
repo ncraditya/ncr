@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Community - Google Help Clone</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         /* Reset aur Basic Styling */
         * {
@@ -179,6 +180,46 @@
         .sidebar-box li:hover {
             background: #f8f9fa;
         }
+
+        /* New Categories CSS */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .category-card {
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+        }
+        .category-card:hover {
+            box-shadow: 0 1px 3px rgba(60,64,67,0.3);
+        }
+        .category-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-links li {
+            font-size: 14px;
+            color: #1a0dab;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .category-links li:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -224,7 +265,110 @@
                         <span>2309 Upvotes</span>
                     </div>
                 </div>
-            </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+                    <h2 class="section-title" style="margin-bottom: 0;">Categories</h2>
+                    <a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all posts</a>
+                </div>
+
+                <div class="categories-grid">
+                    
+                    <div class="category-card">
+                        <div class="category-title">
+                            Watching Videos
+                        </div>
+                        <ul class="category-links">
+                            <li>YouTube test features and experiments</li>
+                            <li>New Features and Updates for YouTube Viewers</li>
+                            <li>YouTube Go is going away in August of this year</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">
+                            Uploading Videos
+                        </div>
+                        <ul class="category-links">
+                            <li>Can I upload my videos to YouTube?</li>
+                            <li>Updates to reduce comment spam and impersonation on YouTube</li>
+                            <li>Creators: Update regarding quality principles for made for kids content</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">
+                            YouTube Community Guidelines
+                        </div>
+                        <ul class="category-links">
+                            <li>A: Are you told that your email is NOT "associated with an active Google Account" when appealing?</li>
+                            <li>u contact me about Tax for YouTube new tax policy ? i didn't understand what u want from me</li>
+                            <li>Cancel premium</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">
+                            Live & Gaming
+                        </div>
+                        <ul class="category-links">
+                            <li>Live Redirect: move your audience to the live stream or Premiere of your choice</li>
+                            <li>Gifted memberships problem</li>
+                            <li>YouTube: We have detected multiple streams using the same stream key with auto-start enabled.</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">
+                            Purchases & Subscriptions
+                        </div>
+                        <ul class="category-links">
+                            <li>How do I talk to someone in the billing office as I am getting double billed for my YouTube TV acct</li>
+                            <li>Confirm your address to restore your YouTube Premium access</li>
+                            <li>Ads in YT Premium on Chromecast</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">
+                            Monetization on YouTube
+                        </div>
+                        <ul class="category-links">
+                            <li>My associated AdSense account has been suspende</li>
+                            <li>Adsense verification fail</li>
+                            <li>eligibility requirement met but no option to apply for monetization</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">
+                            Legal, Copyright & Content ID
+                        </div>
+                        <ul class="category-links">
+                            <li>Profile picture issue.</li>
+                            <li>When I tried to submit a copyright removal webform, it always says: Unable to submit removal request</li>
+                            <li>I ask the YouTube administration to apply punishment to the TVP channel for mass blocking videos.</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">
+                            YouTube Shorts
+                        </div>
+                        <ul class="category-links">
+                            <li>New Features and Updates for Shorts Viewers & Creators</li>
+                        </ul>
+                        <div style="margin-top: 16px;"><a href="#" style="color: #1a73e8; text-decoration: none; font-size: 14px; font-weight: 500;">View all</a></div>
+                    </div>
+
+                </div>
+                </div>
 
             <div class="sidebar">
                 <button class="btn-ask">Post a question</button>
