@@ -48,22 +48,6 @@
   ],
   "jobs": [
     {
-  "id": "bihar-board-12th-result-2026",
-  "title": "Bihar Board 12th Result 2026",
-  "shortTitle": "Bihar Board 12th Result 2026 – Coming Soon",
-  "tag": "new",
-  "importantDates": [
-    {"label": "Result Date", "value": "25 March 2026 (Expected)", "highlight": true},
-    {"label": "Exam Date", "value": "February 2026"}
-  ],
-  "links": [
-    {"label": "Official Website", "links": [{"text": "Click Here", "url": "https://biharboardonline.bihar.gov.in"}]}
-  ],
-  "faqs": [
-    {"q": "Result kab aayega?", "a": "25 March 2026 (Expected)"}
-  ]
-},
-    {
       "id": "rrb-group-d-2026",
       "title": "Railway RRB Group D Online Form 2026",
       "shortTitle": "RRB Group D 2026",
@@ -1291,6 +1275,22 @@
       "title": "Bihar Civil Court Peon Admit Card 2026",
       "link": "https://districts.ecourts.gov.in/bihar"
     }
+    {
+  "id": "bihar-board-12th-result-2026",
+  "title": "Bihar Board 12th Result 2026",
+  "shortTitle": "Bihar Board 12th Result 2026 – Coming Soon",
+  "tag": "new",
+  "importantDates": [
+    {"label": "Result Date", "value": "25 March 2026 (Expected)", "highlight": true},
+    {"label": "Exam Date", "value": "February 2026"}
+  ],
+  "links": [
+    {"label": "Official Website", "links": [{"text": "Click Here", "url": "https://biharboardonline.bihar.gov.in"}]}
+  ],
+  "faqs": [
+    {"q": "Result kab aayega?", "a": "25 March 2026 (Expected)"}
+  ]
+},
   ],
   "answerKeys": [
     {
