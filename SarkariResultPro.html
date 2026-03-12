@@ -27,6 +27,12 @@ a:hover{color:var(--link-hover);text-decoration:underline;}
 .header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#1a3a5c 100%);padding:22px 0;border-bottom:4px solid var(--teal);}
 .header-inner{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:center;position:relative;min-height:90px;}
 .logo-wrap{width:86px;height:86px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:absolute;left:16px;top:50%;transform:translateY(-50%);}
+.logo-wrap::before,.logo-wrap::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid #006d77;animation:logoRipple 2.5s ease infinite;}
+.logo-wrap::after{animation-delay:1.25s;}
+.logo-wrap img{animation:logoPulse 2.5s ease infinite;}
+.logo-fallback{animation:logoPulse 2.5s ease infinite;}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,109,119,.6);}50%{box-shadow:0 0 20px 6px rgba(0,109,119,.3);}}
+@keyframes logoRipple{0%{transform:scale(1);opacity:.8;}100%{transform:scale(1.6);opacity:0;}}
 .logo-wrap img{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5));}
 .logo-fallback{width:86px;height:86px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--teal),var(--navy));border-radius:50%;font-size:28px;font-weight:900;color:var(--gold);font-family:'Rajdhani',sans-serif;}
 .site-info{text-align:center;width:100%;}
