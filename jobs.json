@@ -1242,6 +1242,49 @@
       ]
     }
   ],
+   {
+      "id": "BA_BSC_BCOM PART_3 RESULT",
+      "title": "BA_BSC_BCOM PART_3 RESULT_🔴LIVE",
+      "shortTitle": "BA_BSC_BCOM PART_3 RESULT_🔴LIVE",
+      "tag": "live"
+      "importantDates": [
+        {
+          "label": "Result Date",
+          "value": "15 March 2026",
+          "highlight": true
+        },
+        {
+          "label": "Exam Date",
+          "value": "February 2026"
+        }
+      ],
+      "links": [
+        {
+          "label": "Official Website",
+          "links": [
+            {
+              "text": "Click Here",
+              "url": "https://ppup.ac.in/"
+            }
+          ]
+        }
+       {
+          "label": "check✅ result now",
+          "links": [
+            {
+              "text": "Click Here",
+              "url": "https://lu.indiaexaminfo.co.in/result_patliputra.aspx"
+            }
+          ]
+        } 
+      ],
+      "faqs": [
+        {
+          "q": "Result kab aayega?",
+          "a": "15 March 2026 se live h"
+        }
+      ]
+    },
   "results": [
     {
       "id": 1,
@@ -1296,7 +1339,7 @@
     
     {
       "id": 11,
-      "title": "BA,BSC,BCOM PART-3 RESULT 2026",
+      "title": "BA_BSC_BCOM PART_3 RESULT_🔴LIVE",
       "link": "https://lu.indiaexaminfo.co.in/result_patliputra.aspx"
     }
   ],
@@ -1490,6 +1533,6 @@
     "UP Police SI 2026 – 4543 Posts Apply Online",
     "SBI PO Recruitment 2026 Apply Online",
     "Bihar Board 12th Result 2026 – Coming Soon",
-    "BA,BSC,BCOM PART-3 RESULT-🔴LIVE"
+    "BA_BSC_BCOM PART_3 RESULT_🔴LIVE",
   ]
 }
