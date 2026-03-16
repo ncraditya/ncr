@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>SarkariResult Pro – Sarkari Naukri, Results, Admit Card 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1628;--navy2:#0d1f3c;--teal:#006d77;--teal2:#008c99;
+  --gold:#e9c46a;--gold2:#f4a261;--red:#c1121f;--red2:#e63946;
+  --green:#2d6a4f;--green2:#40916c;--white:#f8f9fa;
+  --gray:#6c757d;--border:#dee2e6;--link:#1a5276;--link-hover:#c1121f;
+  --sec-head:#0a1628;--bg:#f0f2f5;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--bg);color:#1a1a2e;font-size:13px;min-height:100vh;display:flex;flex-direction:column;}
+a{text-decoration:none;color:var(--link);}
+a:hover{color:var(--link-hover);text-decoration:underline;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#1a3a5c 100%);padding:10px 0;border-bottom:3px solid var(--teal);}
+.header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#1a3a5c 100%);padding:22px 0;border-bottom:4px solid var(--teal);}
+.header-inner{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:center;position:relative;min-height:90px;}
+.logo-wrap{width:86px;height:86px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:absolute;left:16px;top:50%;transform:translateY(-50%);}
+.logo-wrap::before,.logo-wrap::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid #006d77;animation:logoRipple 2.5s ease infinite;pointer-events:none;}
+.logo-wrap::after{animation-delay:1.25s;}
+.logo-wrap img{animation:logoPulse 2.5s ease infinite;border-radius:50%;}
+.logo-fallback{animation:logoPulse 2.5s ease infinite;}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,109,119,.6);}50%{box-shadow:0 0 20px 6px rgba(0,109,119,.3);}}
+@keyframes logoRipple{0%{transform:scale(1);opacity:.8;}100%{transform:scale(1.6);opacity:0;}}
+.logo-wrap img{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5));}
+.logo-fallback{width:86px;height:86px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--teal),var(--navy));border-radius:50%;font-size:28px;font-weight:900;color:var(--gold);font-family:'Rajdhani',sans-serif;}
+.site-info{text-align:center;width:100%;}
+.site-name{font-family:'Rajdhani',sans-serif;font-size:42px;font-weight:700;color:#fff;letter-spacing:2px;line-height:1.1;}
+.site-name span{color:var(--gold);}
+@media(max-width:480px){
+  .site-name{font-size:30px;}
+  .logo-wrap,.logo-wrap img{width:62px;height:62px;}
+  .header-inner{min-height:70px;}
+  .header{padding:16px 0;}
+}
+.site-name{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:1px;line-height:1.1;}
+.site-name span{color:var(--gold);}
+.site-sub{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;color:var(--gold);letter-spacing:2px;margin-top:1px;}
+.site-tagline{font-size:11px;color:#94a3b8;margin-top:2px;}
+
+/* NAV */
+.nav{background:var(--navy);border-bottom:2px solid var(--teal);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav a{display:block;padding:9px 14px;color:#cbd5e1;font-size:12px;font-weight:600;white-space:nowrap;border-right:1px solid rgba(255,255,255,.08);transition:all .2s;}
+.nav a:hover,.nav a.active{background:var(--teal);color:#fff;text-decoration:none;}
+
+/* TICKER */
+.ticker-bar{background:linear-gradient(90deg,var(--red),var(--red2));padding:5px 8px;display:flex;align-items:center;justify-content:center;gap:8px;overflow:hidden;}
+.ticker-label{display:flex;align-items:center;gap:5px;background:#fff;color:#cc0000;font-size:11px;font-weight:900;padding:3px 10px 3px 8px;white-space:nowrap;letter-spacing:1px;flex-shrink:0;margin:0 10px;border-radius:3px;box-shadow:0 0 8px rgba(255,255,255,.6);}
+.live-dot{width:9px;height:9px;background:#cc0000;border-radius:50%;animation:livePulse 1.2s ease infinite;flex-shrink:0;}
+@keyframes nameShine{0%,100%{background-position:0%;}50%{background-position:100%;}}
+  0%{box-shadow:0 0 0 0 rgba(204,0,0,.8);opacity:1;}
+  50%{box-shadow:0 0 0 5px rgba(204,0,0,0);opacity:.7;}
+  100%{box-shadow:0 0 0 0 rgba(204,0,0,0);opacity:1;}
+}
+.ticker-wrap{overflow:hidden;max-width:78%;}
+.ticker-track{display:inline-flex;animation:tickMove 40s linear infinite;white-space:nowrap;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{display:inline-flex;align-items:center;padding:0 18px;color:#fff;font-size:12px;border-right:1px solid rgba(255,255,255,.3);cursor:pointer;transition:color .2s;}
+.ticker-item:hover{color:var(--gold);}
+.ticker-item::before{content:'▶';font-size:8px;color:var(--gold);margin-right:6px;}
+@keyframes tickMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* QUICK LINKS */
+.qlinks{background:#fff;border-bottom:2px solid var(--border);padding:7px 10px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+.qlinks::-webkit-scrollbar{display:none;}
+.qlinks a{display:inline-block;margin:2px 4px;background:var(--teal);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:3px;transition:all .2s;}
+.qlinks a:hover{background:var(--red);text-decoration:none;transform:translateY(-1px);}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:10px 8px;flex:1;}
+
+/* NOTICE BOARD */
+.notice-board{background:#2d1b69;border:1px solid #c8d6e5;border-radius:3px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.nb-head{background:linear-gradient(90deg,var(--red),var(--red2));padding:8px 14px;display:flex;align-items:center;justify-content:space-between;}
+.nb-title{color:#fff;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.blink-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:bdot 1s ease infinite;display:inline-block;flex-shrink:0;}
+@keyframes bdot{0%,100%{opacity:1;}50%{opacity:.15;}}
+.nb-btn{background:var(--gold);color:#1a1a1a;font-size:11px;font-weight:700;padding:3px 10px;border-radius:3px;border:none;cursor:pointer;}
+.nb-btn:hover{background:var(--gold2);}
+/* SCROLL AREA */
+.nb-scroll{height:155px;overflow:hidden;}
+.nb-inner{display:flex;flex-direction:column;animation:nbUp 22s linear infinite;}
+.nb-inner:hover{animation-play-state:paused;}
+@keyframes nbUp{0%{transform:translateY(0);}100%{transform:translateY(-50%);}}
+/* VIEW ALL AREA */
+.nb-all{display:none;max-height:400px;overflow-y:auto;}
+.nb-item{padding:7px 14px;border-bottom:1px solid #f0f0f0;display:flex;align-items:flex-start;gap:6px;}
+.nb-item::before{content:'»';color:var(--red);font-weight:900;flex-shrink:0;}
+.nb-item a{color:#fff;font-size:12px;line-height:1.4;flex:1;}
+.nb-item a:hover{color:var(--link-hover);}
+.nb-item .nd{font-size:10px;color:var(--gray);white-space:nowrap;flex-shrink:0;}
+.n-new{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(90deg,#ff0080,#ff8c00,#ffed00,#00c853,#00bfff);
+  background-size:300%;
+  color:#fff;font-size:10px;font-weight:900;
+  width:34px;height:26px;
+  clip-path:polygon(0% 50%, 40% 0%, 40% 25%, 100% 25%, 100% 75%, 40% 75%, 40% 100%);
+  animation:rbw 3s ease infinite, newSlide 0.5s linear infinite, newGlow 1.5s ease infinite;
+  flex-shrink:0;letter-spacing:1px;
+  padding-left:4px;
+  filter:drop-shadow(0 0 4px #ff0080) drop-shadow(0 0 8px #ff8c00);
+}
+@keyframes newGlow{
+  0%,100%{filter:drop-shadow(0 0 4px #ff0080) drop-shadow(0 0 8px #ff8c00);}
+  25%{filter:drop-shadow(0 0 4px #ff8c00) drop-shadow(0 0 8px #ffed00);}
+  50%{filter:drop-shadow(0 0 4px #00c853) drop-shadow(0 0 8px #00bfff);}
+  75%{filter:drop-shadow(0 0 4px #00bfff) drop-shadow(0 0 8px #ff0080);}
+}
+
+/* SOON — double arrow shape, purple pulse */
+.n-soon{
+  background:linear-gradient(90deg,#7c3aed,#a855f7,#ec4899);
+  background-size:300%;color:#fff;font-size:9px;font-weight:800;
+  padding:1px 10px 1px 6px;
+  clip-path:polygon(0 0,calc(100% - 6px) 0,100% 50%,calc(100% - 6px) 100%,0 100%,6px 50%);
+  animation:rbw 3s ease infinite, soonPulse 1.5s ease infinite;
+  flex-shrink:0;letter-spacing:.5px;
+}
+@keyframes soonPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3)}}
+
+/* HOT — flame flicker, red-orange */
+.n-hot{
+  background:linear-gradient(90deg,#dc2626,#f97316,#dc2626);
+  background-size:200%;color:#fff;font-size:9px;font-weight:800;
+  padding:1px 6px;border-radius:2px;flex-shrink:0;
+  animation:hotFlicker 0.8s ease-in-out infinite;
+  text-shadow:0 0 4px rgba(255,100,0,.8);
+}
+@keyframes hotFlicker{0%,100%{background-position:0%;transform:skewX(0deg)}50%{background-position:100%;transform:skewX(-4deg)}}
+
+/* LIVE — blinking dot + glow */
+.n-live{
+  background:#15803d;color:#fff;font-size:9px;font-weight:800;
+  padding:1px 6px 1px 14px;border-radius:2px;flex-shrink:0;
+  position:relative;
+  box-shadow:0 0 6px rgba(34,197,94,.5);
+  animation:liveBlink 1s step-end infinite;
+}
+.n-live::before{
+  content:'';position:absolute;left:4px;top:50%;transform:translateY(-50%);
+  width:6px;height:6px;border-radius:50%;background:#4ade80;
+  animation:liveDot 1s step-end infinite;
+}
+@keyframes liveDot{0%,100%{opacity:1}50%{opacity:0}}
+
+/* UPDATE — rotating arrows style, blue sweep */
+.n-update{
+  background:linear-gradient(90deg,#0369a1,#0891b2,#0369a1);
+  background-size:200%;color:#fff;font-size:9px;font-weight:800;
+  padding:1px 6px;border-radius:10px;flex-shrink:0;
+  animation:updateSweep 2s linear infinite;
+  letter-spacing:.5px;
+}
+@keyframes updateSweep{0%{background-position:0%}100%{background-position:200%}}
+
+/* IMP — star burst, gold flash */
+.n-imp{
+  background:linear-gradient(135deg,#fbbf24,#f59e0b,#fbbf24);
+  background-size:200%;color:#000;font-size:9px;font-weight:800;
+  padding:1px 6px;border-radius:2px;flex-shrink:0;
+  animation:impFlash 1.8s ease infinite;
+  box-shadow:0 0 5px rgba(251,191,36,.6);
+}
+@keyframes impFlash{0%,100%{box-shadow:0 0 5px rgba(251,191,36,.6);background-position:0%}50%{box-shadow:0 0 12px rgba(251,191,36,.9);background-position:100%}}
+
+/* RESULT — badge shape, purple-cyan gradient slide */
+.n-result{
+  background:linear-gradient(90deg,#7c3aed,#0891b2,#7c3aed);
+  background-size:300%;color:#fff;font-size:9px;font-weight:800;
+  padding:1px 6px 1px 4px;
+  border-left:3px solid #a855f7;
+  border-radius:0 2px 2px 0;
+  flex-shrink:0;
+  animation:resultSlide 2.5s linear infinite;
+  letter-spacing:.5px;
+}
+@keyframes resultSlide{0%{background-position:0%}100%{background-position:300%}}
+@keyframes rbw{0%,100%{background-position:0%}50%{background-position:100%}}
+@keyframes newSlide{0%,100%{transform:translateX(0)}25%{transform:translateX(7px)}50%{transform:translateX(0)}75%{transform:translateX(-7px)}}
+
+/* HOT GRID */
+.hot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-bottom:10px;}
+@media(min-width:600px){.hot-grid{grid-template-columns:repeat(4,1fr);}}
+.hot-btn{display:block;padding:10px 6px;text-align:center;color:#fff !important;font-size:12px;font-weight:700;border-radius:3px;line-height:1.3;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.hot-btn:hover{opacity:.88;text-decoration:none;transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.25);color:#fff !important;}
+.hot-btn:active{opacity:1;transform:scale(.97);filter:brightness(1.3);color:#fff !important;text-decoration:none;}
+.hot-btn:visited{color:#fff !important;}
+
+/* SECTION GRIDS */
+.sec-grid-3{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:8px;}
+@media(min-width:700px){.sec-grid-3{grid-template-columns:repeat(3,1fr);}}
+.sec-grid-2{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:8px;}
+@media(min-width:600px){.sec-grid-2{grid-template-columns:repeat(2,1fr);}}
+
+/* SECTION BOX */
+.sec-box{background:#fff;border:1px solid #c8d6e5;border-radius:3px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.sec-head{background:linear-gradient(90deg,var(--sec-head),#1a3a5c);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;}
+.sec-title{color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:.4px;}
+.sec-btn{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff;font-size:10px;padding:2px 8px;border-radius:2px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.sec-btn:hover{background:rgba(255,255,255,.2);}
+.sec-body{padding:2px 0;}
+.sec-item{display:flex;align-items:flex-start;gap:6px;padding:6px 12px;border-bottom:1px solid #f5f5f5;transition:background .15s;}
+.sec-item:last-child{border-bottom:none;}
+.sec-item:hover{background:#f8f9fa;}
+.sec-item::before{content:'›';color:var(--red);font-size:16px;font-weight:900;flex-shrink:0;line-height:1.3;}
+.sec-item a{color:var(--link);font-size:12px;line-height:1.4;flex:1;}
+.sec-item a:hover{color:var(--link-hover);}
+.sec-hidden{display:none;}
+.badge{font-size:9px;font-weight:800;padding:1px 5px;border-radius:2px;flex-shrink:0;margin-top:2px;}
+.b-hot{background:var(--red2);color:#fff;}
+.b-new{background:var(--green2);color:#fff;}
+.job-row{cursor:pointer;}
+.job-row:hover{background:#fff8f0 !important;}
+
+/* PANEL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;}
+.overlay.open{display:block;}
+.panel{position:fixed;top:0;right:-100%;width:min(96vw,520px);height:100vh;background:#fff;z-index:1001;overflow-y:auto;transition:right .3s ease;box-shadow:-4px 0 24px rgba(0,0,0,.3);}
+.panel.open{right:0;}
+.panel-head{background:linear-gradient(90deg,var(--navy),var(--navy2));padding:14px 16px;position:sticky;top:0;z-index:10;}
+.panel-close{position:absolute;top:10px;right:12px;color:#fff;font-size:22px;cursor:pointer;background:none;border:none;line-height:1;}
+.panel-title{color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;padding-right:32px;line-height:1.3;}
+.panel-body{padding:12px;}
+.info-tbl{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:12px;}
+.info-tbl caption{text-align:left;font-weight:700;font-size:12px;color:#fff;background:var(--teal);padding:5px 10px;}
+.info-tbl td{padding:6px 10px;border:1px solid var(--border);}
+.info-tbl tr:nth-child(even) td{background:#f8f9fa;}
+.info-tbl td:first-child{font-weight:600;color:#1a1a2e;width:48%;}
+td.hl{color:var(--red);font-weight:700;}
+.link-tbl{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:12px;}
+.link-tbl caption{text-align:left;font-weight:700;font-size:12px;color:#fff;background:var(--gold2);padding:5px 10px;}
+.link-tbl td{padding:6px 10px;border:1px solid var(--border);}
+.link-tbl tr:nth-child(even) td{background:#fffbf0;}
+.link-tbl td:first-child{font-weight:600;width:48%;}
+.link-tbl a{color:var(--red);font-weight:700;}
+.faq-item{border:1px solid var(--border);border-radius:3px;margin-bottom:5px;overflow:hidden;}
+.faq-q{padding:8px 12px;font-weight:600;font-size:12px;cursor:pointer;background:#f8f9fa;display:flex;justify-content:space-between;}
+.faq-a{display:none;padding:8px 12px;font-size:12px;color:#444;border-top:1px solid var(--border);}
+.faq-a.open{display:block;}
+
+/* FOOTER */
+.footer{background:var(--navy);color:#94a3b8;text-align:center;padding:20px 12px 14px;margin-top:10px;}
+.footer-social{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.soc-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700;color:#fff;transition:all .2s;text-decoration:none;}
+.soc-btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.4);text-decoration:none;color:#fff;}
+.soc-tg{background:linear-gradient(135deg,#0088cc,#006ba1);}
+.soc-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
+.soc-fb{background:linear-gradient(135deg,#1877f2,#0d5fcc);}
+.soc-x{background:linear-gradient(135deg,#000,#333);}
+.footer-copy{font-size:11px;color:#64748b;margin-bottom:10px;}
+.footer-brand{font-size:13px;color:#94a3b8;margin-top:4px;}
+.footer-name{
+  font-family:'Rajdhani',sans-serif;
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:3px;
+  background:linear-gradient(90deg,#e9c46a,#f4a261,#e63946,#e9c46a);
+  background-size:300%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:nameShine 3s ease infinite;
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s;}
+.reveal.vis{opacity:1;transform:none;}
+
+@media(max-width:480px){
+  .site-name{font-size:20px;}
+  .logo-wrap,.logo-wrap img{width:56px;height:56px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="./logo.png" alt="Logo" onerror="this.parentElement.innerHTML='<div class=&quot;logo-fallback&quot;>SR</div>'">
+    </div>
+    <div class="site-info">
+      <div class="site-name">Sarkari<span>Result</span> Pro</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <a href="javascript:void(0)" onclick="window.scrollTo({top:0,behavior:'smooth'});" class="active">Home</a>
+    <a href="javascript:void(0)" onclick="scrollSec('latest-jobs');">Latest Jobs</a>
+    <a href="javascript:void(0)" onclick="scrollSec('results');">Results</a>
+    <a href="javascript:void(0)" onclick="scrollSec('admit-card');">Admit Card</a>
+    <a href="javascript:void(0)" onclick="scrollSec('answer-key');">Answer Key</a>
+    <a href="javascript:void(0)" onclick="scrollSec('syllabus');">Syllabus</a>
+    <a href="javascript:void(0)" onclick="scrollSec('admissions');">Admission</a>
+    <a href="javascript:void(0)" onclick="scrollSec('important');">Important</a>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-label"><span class="live-dot"></span> LIVE</div>
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="mainContent"></div>
+
+<!-- PANEL -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="panel-head">
+    <div class="panel-title" id="panelTitle"></div>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<!-- FOOTER -->
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-social">
+    <a href="https://t.me/ncraditya" target="_blank" class="soc-btn soc-tg">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.48 13.982l-2.95-.924c-.64-.203-.658-.64.136-.954l11.57-4.461c.537-.194 1.006.131.658.578z"/></svg>
+      Telegram
+    </a>
+    <a href="https://www.instagram.com/aaditya_raj100/" target="_blank" class="soc-btn soc-ig">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.facebook.com/105349045497970/" target="_blank" class="soc-btn soc-fb">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+    <a href="https://x.com/NcrAditya" target="_blank" class="soc-btn soc-x">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      X (Twitter)
+    </a>
+  </div>
+  <div class="footer-copy">© 2026 SarkariResult Pro — India's Trusted Govt Jobs Portal</div>
+  <div style="font-size:10px;color:#334155;margin:8px auto;max-width:500px;line-height:1.6;padding:0 8px;">
+    Disclaimer: This website is for informational purposes only. All links redirect to official government websites. We are not responsible for any changes, errors, or discrepancies in the information provided. Always verify details from the official website before applying.
+  </div>
+  <div class="footer-brand">Made with ❤️ by <span class="footer-name">NCR ADITYA</span></div>
+</div>
+
+<script>
+var G = {
+  "site":{"title":"SarkariResult Pro","tagline":"Govt Jobs • Results • Admit Cards","lastUpdated":"11 March 2026"},
+  "quickLinks":[
+    {"label":"Railway Group D Apply Online","url":"https://www.rrbcdg.gov.in"},
+    {"label":"RBI Assistant Apply Online","url":"https://www.rbi.org.in/careers"},
+    {"label":"UP Police SI Apply Online","url":"https://uppbpb.gov.in"},
+    {"label":"SSC CGL Apply Online","url":"https://ssc.gov.in"},
+    {"label":"UPSC IAS Apply Online","url":"https://upsc.gov.in"},
+    {"label":"NEET UG 2026 Apply Online","url":"https://neet.nta.nic.in"},
+    {"label":"SBI PO Apply Online","url":"https://www.sbi.co.in/careers"},
+    {"label":"Army Agniveer Apply Online","url":"https://joinindianarmy.nic.in"},
+    {"label":"BPSC Civil Judge Apply Online","url":"https://bpsc.bih.nic.in"},
+    {"label":"CSBC Constable Apply Online","url":"https://csbc.bih.nic.in"}
+  ],
+  "hotButtons":[
+    {"label":"Railway Group D\nApply Online","color":"#2d6a4f","jobId":"rrb-group-d-2026","url":"https://www.rrbcdg.gov.in"},
+    {"label":"RBI Assistant\nApply Online","color":"#1a3a5c","jobId":"rbi-assistant-2026","url":"https://www.rbi.org.in/careers"},
+    {"label":"UP Police SI\nExam City Details","color":"#c1121f","jobId":"up-police-si-2026","url":"https://uppbpb.gov.in"},
+    {"label":"BPSC Civil Judge\nApply Online","color":"#6a0572","jobId":"bpsc-civil-judge-2026","url":"https://bpsc.bih.nic.in"},
+    {"label":"MPESB Vanrakshak\nApply Online","color":"#7d4e00","jobId":"mpesb-vanrakshak-2026","url":"https://esb.mp.gov.in"},
+    {"label":"Army Agniveer\nApply Online","color":"#1a5276","jobId":"army-agniveer-2026","url":"https://joinindianarmy.nic.in"},
+    {"label":"NEET UG 2026\nApply Online","color":"#006d77","jobId":"neet-ug-2026","url":"https://neet.nta.nic.in"},
+    {"label":"CSBC Constable\nApply Online","color":"#922b21","jobId":"csbc-constable-2026","url":"https://csbc.bih.nic.in"}
+  ],
+  "jobs":[
+    {"id":"rrb-group-d-2026","title":"Railway RRB Group D Recruitment 2026","shortTitle":"RRB Group D 2026","posts":"32,438","tag":"hot","lastDate":"09 March 2026",
+     "importantDates":[{"label":"Notification Date","value":"23 January 2026"},{"label":"Apply Start","value":"23 January 2026"},{"label":"Last Date","value":"09 March 2026","highlight":true},{"label":"Exam Date","value":"September 2026"}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 500/-"},{"label":"SC/ST/Female/Ex-SM","value":"₹ 250/-"}],
+     "ageLimit":[{"label":"Age Limit","value":"18 – 36 Years"},{"label":"Age As On","value":"01 July 2026"}],
+     "vacancy":[{"label":"Total Posts","value":"32,438"},{"label":"Pay","value":"₹ 18,000 – ₹ 56,900"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://www.rrbcdg.gov.in"}]},{"label":"Official Website","links":[{"text":"Click Here","url":"https://www.rrbcdg.gov.in"}]}],
+     "faqs":[{"q":"Total Vacancies?","a":"32,438 posts."},{"q":"Last Date?","a":"09 March 2026."}]},
+    {"id":"rbi-assistant-2026","title":"RBI Assistant Recruitment 2026","shortTitle":"RBI Assistant 2026","posts":"3,500","tag":"hot","lastDate":"15 March 2026",
+     "importantDates":[{"label":"Notification Date","value":"01 February 2026"},{"label":"Last Date","value":"15 March 2026","highlight":true},{"label":"Prelims Exam","value":"April 2026"}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 450/-"},{"label":"SC/ST/PWD","value":"₹ 50/-"}],
+     "ageLimit":[{"label":"Age Limit","value":"20 – 28 Years"}],
+     "vacancy":[{"label":"Total Posts","value":"3,500"},{"label":"Pay","value":"₹ 20,700 – ₹ 53,070"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://www.rbi.org.in/careers"}]}],
+     "faqs":[{"q":"Total Posts?","a":"3,500."},{"q":"Qualification?","a":"Graduation required."}]},
+    {"id":"up-police-si-2026","title":"UP Police Sub Inspector SI Recruitment 2026","shortTitle":"UP Police SI 2026","posts":"4,543","tag":"new","lastDate":"31 March 2026",
+     "importantDates":[{"label":"Last Date","value":"31 March 2026","highlight":true},{"label":"Exam Date","value":"June 2026"}],
+     "applicationFee":[{"label":"All Category","value":"₹ 400/-"}],
+     "ageLimit":[{"label":"Age Limit","value":"21 – 28 Years"}],
+     "vacancy":[{"label":"Total Posts","value":"4,543"},{"label":"Pay","value":"₹ 35,400 – ₹ 1,12,400"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://uppbpb.gov.in"}]}],
+     "faqs":[{"q":"Total Posts?","a":"4,543."},{"q":"Last Date?","a":"31 March 2026."}]},
+    {"id":"ssc-cgl-2026","title":"SSC CGL Combined Graduate Level Recruitment 2026","shortTitle":"SSC CGL 2026","posts":"17,727","tag":"hot","lastDate":"05 April 2026",
+     "importantDates":[{"label":"Notification Date","value":"22 February 2026"},{"label":"Last Date","value":"05 April 2026","highlight":true},{"label":"Tier I Exam","value":"June – July 2026"}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 100/-"},{"label":"SC/ST/Female/Ex-SM/PWD","value":"Nil"}],
+     "ageLimit":[{"label":"Age Limit","value":"18 – 32 Years (Post Wise)"},{"label":"Age As On","value":"01 August 2026"}],
+     "vacancy":[{"label":"Total Posts","value":"17,727"},{"label":"Pay Level","value":"Level 4 to 8"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://ssc.gov.in"}]},{"label":"Notification","links":[{"text":"Hindi","url":"https://ssc.gov.in"},{"text":"English","url":"https://ssc.gov.in"}]}],
+     "faqs":[{"q":"Total Posts?","a":"17,727."},{"q":"Last Date?","a":"05 April 2026."}]},
+    {"id":"upsc-civil-2026","title":"UPSC Civil Services IAS/IFS Prelims 2026","shortTitle":"UPSC IAS 2026","posts":"979","tag":"new","lastDate":"11 February 2026",
+     "importantDates":[{"label":"Last Date","value":"11 February 2026","highlight":true},{"label":"Prelims Exam","value":"24 May 2026"},{"label":"Mains Exam","value":"September 2026"}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 100/-"},{"label":"SC/ST/Female/PWD","value":"Nil"}],
+     "ageLimit":[{"label":"Age Limit","value":"21 – 32 Years (General)"}],
+     "vacancy":[{"label":"Total Posts","value":"979"},{"label":"IAS","value":"180"},{"label":"IFS","value":"150"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://upsconline.nic.in"}]},{"label":"Official Website","links":[{"text":"Click Here","url":"https://upsc.gov.in"}]}],
+     "faqs":[{"q":"Total Posts?","a":"979."},{"q":"Prelims Date?","a":"24 May 2026."}]},
+    {"id":"sbi-po-2026","title":"SBI PO Probationary Officer Recruitment 2026","shortTitle":"SBI PO 2026","posts":"2,000","tag":"new","lastDate":"20 April 2026",
+     "importantDates":[{"label":"Apply Start","value":"01 March 2026"},{"label":"Last Date","value":"20 April 2026","highlight":true}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 750/-"},{"label":"SC/ST/PWD","value":"Nil"}],
+     "ageLimit":[{"label":"Age Limit","value":"21 – 30 Years"}],
+     "vacancy":[{"label":"Total Posts","value":"2,000"},{"label":"Pay","value":"₹ 41,960 – ₹ 63,840"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://www.sbi.co.in/careers"}]}],
+     "faqs":[{"q":"Total Posts?","a":"2,000."}]},
+    {"id":"neet-ug-2026","title":"NTA NEET UG 2026 Online Form","shortTitle":"NEET UG 2026","posts":"N/A","tag":"new","lastDate":"Extended",
+     "importantDates":[{"label":"Application Start","value":"February 2026"},{"label":"Last Date","value":"Extended","highlight":true},{"label":"Exam Date","value":"May 2026"}],
+     "applicationFee":[{"label":"General","value":"₹ 1,700/-"},{"label":"OBC/EWS","value":"₹ 1,600/-"},{"label":"SC/ST/PWD","value":"₹ 1,000/-"}],
+     "ageLimit":[{"label":"Minimum Age","value":"17 Years"},{"label":"Maximum Age","value":"No Limit"}],
+     "vacancy":[{"label":"Seats","value":"Approx 1,08,940+"},{"label":"Exam Type","value":"Medical Entrance"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://neet.nta.nic.in"}]},{"label":"Official Website","links":[{"text":"Click Here","url":"https://neet.nta.nic.in"}]}],
+     "faqs":[{"q":"Exam date?","a":"May 2026."},{"q":"Application fee General?","a":"₹ 1,700/-"}]},
+    {"id":"army-agniveer-2026","title":"Indian Army Agniveer Rally Recruitment 2026","shortTitle":"Army Agniveer 2026","posts":"Various","tag":"new","lastDate":"Notify Later",
+     "importantDates":[{"label":"Notification","value":"2026"},{"label":"Apply Start","value":"Notify Later"},{"label":"Exam Date","value":"Notify Later"}],
+     "applicationFee":[{"label":"Application Fee","value":"Nil"}],
+     "ageLimit":[{"label":"Age Limit","value":"17.5 – 21 Years"},{"label":"Age Relaxation","value":"As Per Govt Rules"}],
+     "vacancy":[{"label":"Posts","value":"Various"},{"label":"Pay (Year 1)","value":"₹ 30,000/month"},{"label":"Pay (Year 4)","value":"₹ 40,000/month"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://joinindianarmy.nic.in"}]},{"label":"Official Website","links":[{"text":"Click Here","url":"https://joinindianarmy.nic.in"}]}],
+     "faqs":[{"q":"Age limit?","a":"17.5 to 21 years."},{"q":"Fee?","a":"No application fee."}]},
+    {"id":"bpsc-civil-judge-2026","title":"BPSC Civil Judge Junior Division Recruitment 2026","shortTitle":"BPSC Civil Judge 2026","posts":"Various","tag":"new","lastDate":"Notify Later",
+     "importantDates":[{"label":"Notification Date","value":"2026"},{"label":"Apply Last Date","value":"Notify Later","highlight":true}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 600/-"},{"label":"SC/ST","value":"₹ 150/-"}],
+     "ageLimit":[{"label":"Age Limit","value":"22 – 35 Years"},{"label":"Age As On","value":"As Per BPSC Rules"}],
+     "vacancy":[{"label":"Posts","value":"Various"},{"label":"Pay Scale","value":"As Per 7th Pay Commission"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://bpsc.bih.nic.in"}]},{"label":"Official Website","links":[{"text":"Click Here","url":"https://bpsc.bih.nic.in"}]}],
+     "faqs":[{"q":"Qualification?","a":"LLB degree from recognized university."},{"q":"Official website?","a":"bpsc.bih.nic.in"}]},
+    {"id":"mpesb-vanrakshak-2026","title":"MPESB Vanrakshak Forest Guard Recruitment 2026","shortTitle":"MPESB Vanrakshak 2026","posts":"Various","tag":"new","lastDate":"Notify Later",
+     "importantDates":[{"label":"Notification Date","value":"2026"},{"label":"Apply Last Date","value":"Notify Later","highlight":true}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 500/-"},{"label":"SC/ST","value":"₹ 250/-"}],
+     "ageLimit":[{"label":"Age Limit","value":"18 – 25 Years"},{"label":"Age Relaxation","value":"As Per MP Govt Rules"}],
+     "vacancy":[{"label":"Posts","value":"Various"},{"label":"Pay Scale","value":"₹ 19,500 – ₹ 62,000"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://esb.mp.gov.in"}]},{"label":"Official Website","links":[{"text":"Click Here","url":"https://esb.mp.gov.in"}]}],
+     "faqs":[{"q":"Qualification?","a":"12th pass from recognized board."},{"q":"Official website?","a":"esb.mp.gov.in"}]},
+    {"id":"csbc-constable-2026","title":"CSBC Bihar Police Constable Recruitment 2026","shortTitle":"CSBC Constable 2026","posts":"Various","tag":"new","lastDate":"Notify Later",
+     "importantDates":[{"label":"Notification Date","value":"2026"},{"label":"Apply Last Date","value":"Notify Later","highlight":true}],
+     "applicationFee":[{"label":"General/OBC/EWS","value":"₹ 450/-"},{"label":"SC/ST","value":"₹ 112/-"}],
+     "ageLimit":[{"label":"Male","value":"18 – 25 Years"},{"label":"Female","value":"18 – 25 Years"},{"label":"Age Relaxation","value":"As Per Bihar Govt Rules"}],
+     "vacancy":[{"label":"Posts","value":"Various"},{"label":"Pay Scale","value":"₹ 21,700 – ₹ 69,100"}],
+     "links":[{"label":"Apply Online","links":[{"text":"Click Here","url":"https://csbc.bih.nic.in"}]},{"label":"Official Website","links":[{"text":"Click Here","url":"https://csbc.bih.nic.in"}]}],
+     "faqs":[{"q":"Qualification?","a":"12th pass from recognized board."},{"q":"Physical test?","a":"Yes, physical efficiency test required."}]}
+  ],
+  "results":[
+    {"title":"Indian Airforce AFCAT 01/2026 Result","link":"https://careerindianairforce.cdac.in"},
+    {"title":"SBI Clerk 2025 Mains Score Card","link":"https://www.sbi.co.in/careers"},
+    {"title":"DDA Junior Engineer Electrical/Mechanical 2025 Result","link":"https://dda.gov.in"},
+    {"title":"BPSSC Enforcement Sub Inspector 2025 Final Result","link":"https://bpssc.bih.nic.in"},
+    {"title":"UPSC Civil Services IAS 2025 Final Result","link":"https://upsc.gov.in"},
+    {"title":"India Post GDS Result / First Merit List 2026","link":"https://indiapostgdsonline.gov.in"},
+    {"title":"SSC Junior Engineer JE 2025 Paper I Result","link":"https://ssc.gov.in"},
+    {"title":"MHA IB ACIO 2025 Tier II Result","link":"https://mha.gov.in"},
+    {"title":"IBPS Clerk 15th Mains Result 2026","link":"https://www.ibps.in"},
+    {"title":"SSC 10+2 CHSL Tier I Result 2026","link":"https://ssc.gov.in"},
+    {"title":"NTA AISSEE Result / Score Card 2026","link":"https://www.nta.ac.in"},
+    {"title":"SBI Clerk Mains Result 2026","link":"https://www.sbi.co.in/careers"},
+    {"title":"UPSSSC Junior Assistant 2023 Typing Test Result","link":"https://upsssc.gov.in"},
+    {"title":"UPSSSC Lekhpal Eligibility Result 2026 Declared","link":"https://upsssc.gov.in"}
+  ],
+  "admitCards":[
+    {"title":"UP Police Sub Inspector SI Exam City Details 2026","link":"https://uppbpb.gov.in"},
+    {"title":"CBSE KVS/NVS Teaching Non Teaching Tier II Exam City 2026","link":"https://cbse.gov.in"},
+    {"title":"UPPSC Staff Nurse Unani Admit Card 2026","link":"https://uppsc.up.nic.in"},
+    {"title":"SSC CHSL 2025 Tier II Exam Date","link":"https://ssc.gov.in"},
+    {"title":"SSC Junior Engineer JE Paper II Exam Date 2026","link":"https://ssc.gov.in"},
+    {"title":"Railway RRB Paramedical Admit Card 2026","link":"https://www.rrbcdg.gov.in"},
+    {"title":"UPSSSC Junior Engineer JE Civil 2024 Exam Date","link":"https://upsssc.gov.in"},
+    {"title":"RRB NTPC Graduate Level Exam City Details","link":"https://www.rrbcdg.gov.in"},
+    {"title":"RBI Non CSG Various Post Admit Card 2026","link":"https://www.rbi.org.in/careers"},
+    {"title":"Bihar Civil Court Peon Admit Card 2026","link":"https://districts.ecourts.gov.in/bihar"},
+    {"title":"SBI Circle Based Officer CBO Admit Card 2026","link":"https://www.sbi.co.in/careers"},
+    {"title":"Delhi DSSSB February to May 2026 Exam Admit Card","link":"https://dsssb.delhi.gov.in"}
+  ],
+  "answerKeys":[
+    {"title":"Bihar Board BSEB Class 10th Matric Answer Key 2026","link":"https://biharboardonline.bihar.gov.in"},
+    {"title":"Railway RRB Junior Engineer JE Answer Key 2026","link":"https://www.rrbcdg.gov.in"},
+    {"title":"SSC MTS 2025 Answer Key","link":"https://ssc.gov.in"},
+    {"title":"Railway RRB Section Controller Answer Key 2026","link":"https://www.rrbcdg.gov.in"},
+    {"title":"Delhi DSSSB Answer Key 2026","link":"https://dsssb.delhi.gov.in"}
+  ],
+  "syllabus":[
+    {"title":"NTA NEET UG 2026 Syllabus","link":"https://neet.nta.nic.in"},
+    {"title":"SSC GD Constable Syllabus 2026","link":"https://ssc.gov.in"},
+    {"title":"DRDO CEPTAM 11 Exam Syllabus","link":"https://drdo.gov.in"},
+    {"title":"UP Super TET Assistant Teacher Syllabus","link":"https://updeled.gov.in"},
+    {"title":"UPTET 2026 Primary/Junior Level Syllabus","link":"https://updeled.gov.in"}
+  ],
+  "admissions":[
+    {"title":"Army AFMC B.Sc Nursing Admissions Online Form 2026","link":"https://www.amc.gov.in"},
+    {"title":"NTA NEET UG 2026 Online Form Extended","link":"https://neet.nta.nic.in"},
+    {"title":"NTA NSSNET 2026 Online Form","link":"https://www.nta.ac.in"},
+    {"title":"BHU School Admissions SET/CHS Online Form 2026","link":"https://bhuonline.in"},
+    {"title":"All India Bar Exam AIBE XXI Online Form","link":"https://allindiabarexamination.com"},
+    {"title":"NTA NCET 2026 Online Form","link":"https://www.nta.ac.in"},
+    {"title":"UP Polytechnic JEECUP Online Form 2026","link":"https://jeecup.admissions.nic.in"},
+    {"title":"IERT Admission 2026 Online Form","link":"https://iert.ac.in"}
+  ],
+  "important":[
+    {"title":"NIELIT CCC Online Form 2026","link":"https://student.nielit.gov.in"},
+    {"title":"MP CPCT Online Form 2026","link":"https://cpct.mp.gov.in"},
+    {"title":"MP Rojgar Panjiyan 2025","link":"https://mprojgar.gov.in"},
+    {"title":"UP Scholarship Online Form 2024","link":"https://scholarship.up.gov.in"},
+    {"title":"SSC OTR Online Form 2024","link":"https://ssc.gov.in"}
+  ],
+  "certificateVerification":[
+    {"title":"NTA UGC NET December 2024 E Certificate Download","link":"https://ugcnet.nta.nic.in"},
+    {"title":"MPPSC SET 2024 E Certificate","link":"https://mppsc.mp.gov.in"},
+    {"title":"UPSSSC PET 2023 Certificate","link":"https://upsssc.gov.in"},
+    {"title":"Voter ID Online Form 2024 / E EPIC Download","link":"https://voters.eci.gov.in"},
+    {"title":"Aadhar Pan Card Link Online / Check Status 2023","link":"https://www.incometax.gov.in"}
+  ],
+  "importantNotices":[
+    "Railway RRB Group D 2026 – Last Date 09 March 2026",
+    "UPSC Civil Services 2026 Prelims – 24 May 2026",
+    "SSC CGL 2026 – Last Date 05 April 2026",
+    "RBI Assistant 2026 – Apply Now – 3500 Posts",
+    "UP Police SI 2026 – 4543 Posts – Apply Online",
+    "SBI PO Recruitment 2026 – Apply Online",
+    "NEET UG 2026 – Last Date Extended",
+    "Army Agniveer Rally Recruitment 2026 – Apply Online"
+  ]
+};
+
+async function init() {
+  try {
+    const r = await fetch('./jobs.json?v='+Date.now());
+    if(r.ok) {
+      G = await r.json();
+      // hotLinks → hotButtons compatibility
+      if(!G.hotButtons && G.hotLinks) {
+        G.hotButtons = G.hotLinks.map(l=>({
+          label: l.label,
+          color: l.color,
+          url: l.url || '#',
+          jobId: l.jobId || null
+        }));
+      }
+      // Merge jobs + resultDetails for panel lookup
+      G.allPanels = [...(G.jobs||[]), ...(G.resultDetails||[])];
+    }
+  } catch(e){}
+  render();
+}
+
+// Smart panel finder - matches notice/button text to any panel (job or result)
+function findPanel(text) {
+  if(typeof text === 'object') text = text.text || '';
+  const nl = text.toLowerCase();
+  return (G.allPanels||[]).find(j => {
+    const st = (j.shortTitle||'').toLowerCase();
+    const ti = (j.title||'').toLowerCase();
+    return nl.includes(st) || nl.includes(ti.split(' ').slice(0,4).join(' '));
+  });
+}
+
+function render() {
+  const tickerNotices = G.importantNotices || [];
+  const tickerDoubled = [...tickerNotices, ...tickerNotices];
+  document.getElementById('tickerTrack').innerHTML = tickerDoubled.map(n => {
+    const panel = findPanel(n);
+    const click = panel
+      ? `onclick="openPanel('${panel.id}')"`
+      : `onclick="scrollSec('latest-jobs')"`;
+    const nTxt = typeof n === 'string' ? n : n.text;
+    return `<div class="ticker-item" ${click}>${nTxt}</div>`;
+  }).join('');
+
+  // Quick links (only if element exists)
+  const qBar = document.getElementById('qlinksBar');
+  if (qBar) qBar.innerHTML = (G.quickLinks||[]).map(l=>`<a href="${l.url}" target="_blank">${l.label}</a>`).join('');
+
+  // Main
+  buildMain();
+  // Reveal
+  const io = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
+  setTimeout(()=>document.querySelectorAll('.reveal').forEach(el=>io.observe(el)),100);
+}
+
+function buildMain() {
+  const d = G;
+  const notices = d.importantNotices||[];
+  const doubled = [...notices,...notices];
+
+  let html = '';
+
+  // NOTICE BOARD
+  html += `<div class="notice-board reveal">
+    <div class="nb-head">
+      <div class="nb-title"><span class="blink-dot"></span> UPDATED NOTICE</div>
+      <button class="nb-btn" onclick="toggleNotice()">» VIEW ALL</button>
+    </div>
+    <div class="nb-scroll" id="nbScroll">
+      <div class="nb-inner">
+        ${doubled.map(n=>{
+          const panel=findPanel(n);
+          const click=panel?`onclick="openPanel('${panel.id}')"`:`onclick="scrollSec('latest-jobs')"`;
+          const isSoon=n.toLowerCase().includes('coming soon')||n.toLowerCase().includes('soon');
+          const bKey = (d.noticeBadges&&d.noticeBadges[doubled.indexOf(n)%notices.length]) || (isSoon?'soon':'new');
+          const badge=`<span class="n-${bKey}">${bKey.toUpperCase()}</span>`;
+          const nText = typeof n === 'string' ? n : n.text;
+          const nIdx = doubled.indexOf(n) % notices.length;
+          const nDate = typeof n === 'string' ? (d.noticeDates&&d.noticeDates[nIdx] ? d.noticeDates[nIdx] : d.site.lastUpdated) : (n.date || d.site.lastUpdated);
+          return `<div class="nb-item"><a href="javascript:void(0)" ${click}>${nText}</a>${badge}<span class="nd">${nDate}</span></div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="nb-all" id="nbAll">
+      ${notices.map(n=>{
+        const panel=findPanel(n);
+        const click=panel?`onclick="openPanel('${panel.id}')"`:`onclick="scrollSec('latest-jobs')"`;
+        const isSoon=n.toLowerCase().includes('coming soon')||n.toLowerCase().includes('soon');
+        const bKey = (d.noticeBadges&&d.noticeBadges[notices.indexOf(n)]) || (isSoon?'soon':'new');
+        const badge=`<span class="n-${bKey}">${bKey.toUpperCase()}</span>`;
+        const nText = typeof n === 'string' ? n : n.text;
+        const nIdx = notices.indexOf(n);
+        const nDate = typeof n === 'string' ? (d.noticeDates&&d.noticeDates[nIdx] ? d.noticeDates[nIdx] : d.site.lastUpdated) : (n.date || d.site.lastUpdated);
+        return `<div class="nb-item"><a href="javascript:void(0)" ${click}>${nText}</a>${badge}<span class="nd">${nDate}</span></div>`;
+      }).join('')}
+    </div>
+  </div>`;
+
+  // HOT BUTTONS
+  html += `<div class="hot-grid reveal">`;
+  (d.hotButtons||[]).forEach(b=>{
+    const labelL = b.label.toLowerCase();
+    // Smart match from allPanels first, then fallback to jobId
+    const matchedPanel = (G.allPanels||[]).find(j =>
+      labelL.includes((j.shortTitle||'').toLowerCase()) ||
+      labelL.includes((j.title||'').toLowerCase().split(' ').slice(0,3).join(' '))
+    );
+    const autoId = b.jobId || (matchedPanel ? matchedPanel.id : null);
+    const action = autoId
+      ? `onclick="openPanel('${autoId}')" href="javascript:void(0)"`
+      : `href="${b.url||'#'}" target="_blank"`;
+    html += `<a ${action} class="hot-btn" style="background:${b.color}">${b.label.replace('\n','<br>')}</a>`;
+  });
+  html += `</div>`;
+
+  // 3 COL: Result | Admit Card | Latest Jobs
+  html += `<div class="sec-grid-3">`;
+  html += secBox('📊 Result', d.results, 'results');
+  html += secBox('🎫 Admit Card', d.admitCards, 'admit-card');
+  html += jobsBox(d.jobs);
+  html += `</div>`;
+
+  // 3 COL: Answer Key | Syllabus | Admission
+  html += `<div class="sec-grid-3">`;
+  html += secBox('🗝️ Answer Key', d.answerKeys, 'answer-key');
+  html += secBox('📚 Syllabus', d.syllabus, 'syllabus');
+  html += secBox('🎓 Admission', d.admissions, 'admissions');
+  html += `</div>`;
+
+  // 2 COL: Important | Certificate
+  html += `<div class="sec-grid-2">`;
+  html += secBox('⭐ Important', d.important, 'important');
+  html += secBox('📜 Certificate Verification', d.certificateVerification, 'certificate');
+  html += `</div>`;
+
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+function secBox(title, items, id) {
+  if (!items||!items.length) return '';
+  const vis = items.slice(0,8);
+  const hid = items.slice(8);
+  const rows = arr => arr.map(item=>`<div class="sec-item"><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></div>`).join('');
+  const hidHtml = hid.length ? `<div class="sec-hidden" id="hid-${id}">${rows(hid)}</div>` : '';
+  return `<div class="sec-box reveal" id="${id}">
+    <div class="sec-head">
+      <div class="sec-title">${title}</div>
+      <button class="sec-btn" onclick="toggleMore('${id}')">View More ›</button>
+    </div>
+    <div class="sec-body">${rows(vis)}${hidHtml}</div>
+  </div>`;
+}
+
+function jobsBox(jobs) {
+  // Only show actual jobs, not resultDetails
+  const onlyJobs = (jobs||[]).filter(j => j.category !== 'result');
+  if (!onlyJobs.length) return '';
+  const vis = onlyJobs.slice(0,8);
+  const hid = onlyJobs.slice(8);
+  const row = j => {
+    const badge = j.tag==='hot'?`<span class="badge b-hot">HOT</span>`:j.tag==='new'?`<span class="badge b-new">NEW</span>`:'';
+    return `<div class="sec-item job-row" onclick="openPanel('${j.id}')">
+      <span style="color:var(--link);font-size:12px;line-height:1.4;flex:1;">${j.title}</span>${badge}
+    </div>`;
+  };
+  const hidHtml = hid.length ? `<div class="sec-hidden" id="hid-latest-jobs">${hid.map(row).join('')}</div>` : '';
+  return `<div class="sec-box reveal" id="latest-jobs">
+    <div class="sec-head">
+      <div class="sec-title">💼 Latest Jobs</div>
+      <button class="sec-btn" onclick="toggleMore('latest-jobs')">View More ›</button>
+    </div>
+    <div class="sec-body">${vis.map(row).join('')}${hidHtml}</div>
+  </div>`;
+}
+
+/* NOTICE TOGGLE — scroll hide, all show */
+function toggleNotice() {
+  const scroll = document.getElementById('nbScroll');
+  const all    = document.getElementById('nbAll');
+  const btn    = document.querySelector('.nb-btn');
+  const open   = btn.textContent.includes('HIDE');
+  scroll.style.display = open ? 'block' : 'none';
+  all.style.display    = open ? 'none'  : 'block';
+  btn.textContent      = open ? '» VIEW ALL' : '« HIDE';
+}
+
+/* VIEW MORE */
+function toggleMore(id) {
+  const hid = document.getElementById('hid-'+id);
+  const btn = document.querySelector('#'+id+' .sec-btn');
+  if (!hid||!btn) return;
+  const open = hid.style.display==='block';
+  hid.style.display = open ? 'none' : 'block';
+  btn.textContent   = open ? 'View More ›' : 'View Less ‹';
+}
+
+/* JOB PANEL */
+function openPanel(id) {
+  const job = (G.allPanels||[...( G.jobs||[]),...(G.resultDetails||[])]).find(j=>j.id===id);
+  if (!job) return;
+  document.getElementById('panelTitle').textContent = job.title;
+  let h = '';
+  const tbl = (cap, rows) => {
+    if (!rows||!rows.length) return '';
+    return `<table class="info-tbl"><caption>${cap}</caption>${rows.map(r=>`<tr><td>${r.label}</td><td class="${r.highlight?'hl':''}">${r.value}</td></tr>`).join('')}</table>`;
+  };
+  h += tbl('📅 Important Dates', job.importantDates);
+  h += tbl('💰 Application Fee', job.applicationFee);
+  h += tbl('🎂 Age Limit', job.ageLimit);
+  h += tbl('📋 Vacancy Details', job.vacancy);
+  // Custom sections
+  if (job.customSections&&job.customSections.length) {
+    job.customSections.forEach(sec=>{
+      h += tbl('📌 '+sec.name, sec.rows);
+    });
+  }
+  if (job.links&&job.links.length) {
+    h += `<table class="link-tbl"><caption>🔗 Important Links</caption>`;
+    job.links.forEach(r=>{
+      h += `<tr><td>${r.label}</td><td>${r.links.map(l=>`<a href="${l.url}" target="_blank">${l.text}</a>`).join(' | ')}</td></tr>`;
+    });
+    h += `</table>`;
+  }
+  if (job.faqs&&job.faqs.length) {
+    h += `<div style="font-weight:700;font-size:12px;margin:8px 0 5px;">❓ FAQs</div>`;
+    job.faqs.forEach((f,i)=>{
+      h += `<div class="faq-item"><div class="faq-q" onclick="toggleFaq(${i})">${f.q}<span>▼</span></div><div class="faq-a" id="fq${i}">${f.a}</div></div>`;
+    });
+  }
+  document.getElementById('panelBody').innerHTML = h;
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function toggleFaq(i) { document.getElementById('fq'+i).classList.toggle('open'); }
+
+/* SMOOTH SCROLL TO SECTION */
+function scrollSec(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const offset = 55; // nav height
+  const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({top, behavior:'smooth'});
+  // highlight active nav
+  document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+  const activeLink = document.querySelector(`.nav a[href="#${id}"]`);
+  if (activeLink) activeLink.classList.add('active');
+}
+
+init();
+</script>
+</body>
+</html>
