@@ -1243,9 +1243,9 @@
     },
     {
       "id": "ba-bsc-bcom-part3-result-2026",
-      "title": "BA_BSC_BCOM PART_3 RESULT_🔴LIVE",
-      "shortTitle": "BA_BSC_BCOM PART_3 RESULT_🔴LIVE",
-      "tag": "new",
+      "title": "BA_BSC_BCOM PART_3 RESULT-LIVE",
+      "shortTitle": "BA_BSC_BCOM PART_3 RESULT-LIVE",
+      "tag": "live",
       "importantDates": [
         {
           "label": "Result Date",
@@ -1268,7 +1268,7 @@
           ]
         },
         {
-          "label": "check✅ result now",
+          "label": "✅ check result",
           "links": [
             {
               "text": "Click Here",
@@ -1338,7 +1338,7 @@
     },
     {
       "id": 11,
-      "title": "BA_BSC_BCOM PART_3 RESULT_🔴LIVE",
+      "title": "BA_BSC_BCOM PART_3 RESULT-LIVE",
       "link": "https://lu.indiaexaminfo.co.in/result_patliputra.aspx"
     }
   ],
@@ -1532,6 +1532,6 @@
     "UP Police SI 2026 – 4543 Posts Apply Online",
     "SBI PO Recruitment 2026 Apply Online",
     "Bihar Board 12th Result 2026 – Coming Soon",
-    "BA_BSC_BCOM PART_3 RESULT_🔴LIVE"
+    "BA_BSC_BCOM PART_3 RESULT-LIVE"
   ]
 }
